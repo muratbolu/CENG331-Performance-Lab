@@ -499,24 +499,24 @@ char average_pooling_descr[] = "Average Pooling: Current working version";
 void average_pooling(int dim, pixel *src, pixel *dst)
 {
 
-    int i,j,k,i2,j2, dim_2;
+    int i,j,k,i2,j2, dim_2, index;
     pixel temp = {0,0,0};
     pixel temp_src1, temp_src2;
     dim_2 = dim/2;
     for(i = 0; i < dim_2; i++){
-        i2 = i*2;
+        i2 = i + i;
         for(j = 0; j < dim_2; j++) {
-            j2 = j*2;
+            j2 = j + j;
             temp.red = 0;
             temp.green = 0;
             temp.blue = 0;
             for(k = 0; k < 2; k++) {
-                temp_src1 = src[RIDX(i*2 + k, j*2, dim)];
-                temp_src2 = src[RIDX(i*2 + k, j*2 + 1, dim)];
+                index = RIDX(i2 + k, j2, dim);
+                temp_src1 = src[index];
+                temp_src2 = src[index+1];
                 temp.red += (temp_src1.red + temp_src2.red);
                 temp.green += (temp_src1.green + temp_src2.green);
                 temp.blue += (temp_src1.blue + temp_src2.blue);
-                
             }
             temp.red /= 4;
             temp.green /= 4;
@@ -525,6 +525,67 @@ void average_pooling(int dim, pixel *src, pixel *dst)
         }
     }
 }
+char another_average_pooling_descr[] = "Average Pooling: testing";
+void another_average_pooling(int dim, pixel *src, pixel *dst)
+{
+
+    int i,j,k,i2 = 0,j2 = 0, dim_2, index;
+    unsigned short temp_red = 0, temp_green = 0, temp_blue = 0;
+    dim_2 = dim/2;
+    for(i = 0; i < dim_2; i++){
+        for(j = 0; j < dim_2; j++) {
+            j2 = j + j;
+            temp_red = 0;
+            temp_green = 0;
+            temp_blue = 0;
+            for(k = 0; k < 2; k++) {
+                index = RIDX(i2 + k, j2, dim);
+                temp_red += src[index].red + src[index+1].red;
+                temp_green += src[index].green + src[index+1].green;
+                temp_blue += src[index].blue + src[index+1].blue;
+                
+            }
+            index = RIDX(i, j, dim_2);
+            dst[index].red = temp_red/4;
+            dst[index].green = temp_green/4;
+            dst[index].blue = temp_blue/4;
+        }
+        i2 += 2;
+    }
+}
+char seq_average_pooling_descr[] = "Average Pooling: reducing sequential dependency";
+void seq_average_pooling(int dim, pixel *src, pixel *dst)
+{
+
+    int i,j,k,i2 = 0,j2 = 0, dim_2, index;
+    unsigned short temp_red = 0, temp_green = 0, temp_blue = 0, temp_red2 = 0, temp_green2 = 0, temp_blue2 = 0;
+    dim_2 = dim/2;
+    for(i = 0; i < dim_2; i++){
+        for(j = 0; j < dim_2; j++) {
+            j2 = j + j;
+            temp_red = 0, temp_green = 0, temp_blue = 0, temp_red2 = 0, temp_green2 = 0, temp_blue2 = 0;
+
+            for(k = 0; k < 2; k++) {
+                index = RIDX(i2 + k, j2, dim);
+                
+                temp_red += src[index].red;
+                temp_green += src[index].green;
+                temp_blue += src[index].blue;
+
+                temp_red2 += src[index+1].red;
+                temp_green2 += src[index+1].green;
+                temp_blue2 += src[index+1].blue;
+            }
+            index = RIDX(i, j, dim_2);
+            dst[index].red = (temp_red + temp_red2)/4;
+            dst[index].green = (temp_green + temp_green2)/4;
+            dst[index].blue = (temp_blue + temp_blue2)/4;
+        }
+        i2 += 2;
+    }
+}
+
+
 
 /******************************************************************************
  * register_average_pooling_functions - Register all of your different versions
@@ -537,6 +598,8 @@ void average_pooling(int dim, pixel *src, pixel *dst)
 void register_average_pooling_functions() {
     add_average_pooling_function(&naive_average_pooling, naive_average_pooling_descr);
     add_average_pooling_function(&average_pooling, average_pooling_descr);
+    add_average_pooling_function(&another_average_pooling, another_average_pooling_descr);
+    add_average_pooling_function(&seq_average_pooling, seq_average_pooling_descr);
     /* ... Register additional test functions here */
 }
 
