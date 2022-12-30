@@ -3,3 +3,4 @@ Performance lab given in CENG331 Computer Organization course during Fall 2022-2
 
 Team:
 * Murat Bolu
+* Umut Yılmaz
