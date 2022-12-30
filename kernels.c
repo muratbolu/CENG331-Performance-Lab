@@ -11,11 +11,11 @@
 team_t team = {
         "TEAM",    /* Team Name */
 
-        "eXXXXXX",      /* First student ID */
-        "NAME",       /* First student name */
+        "e252130",      /* First student ID */
+        "MURAT BOLU",       /* First student name */
 
-        "",             /* Second student ID */
-        "",           /* Second student name */
+        "e244906",             /* Second student ID */
+        "UMUT YILMAZ",           /* Second student name */
 
         "",             /* Third student ID */
         ""            /* Third student Name */
