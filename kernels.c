@@ -121,8 +121,23 @@ char average_pooling_descr[] = "Average Pooling: Current working version";
 void average_pooling(int dim, pixel *src, pixel *dst)
 {
 
-    naive_average_pooling(dim,src,dst);
+    int i,j,k,l, dim_2;
+    pixel temp = {0,0,0};
+    pixel temp_src1, temp_src2;
+    dim_2 = dim/2;
+    for(i = 0; i < dim_2; i++)
+        for(j = 0; j < dim_2; j++) {
+        
+            for(k = 0; k < 2; k++) {
+                temp_src1 = src[RIDX(i*2 + k, j*2, dim)];
+                temp_src2 = src[RIDX(i*2 + k, j*2 + 1, dim)];
+                temp.red += (temp_src1.red + temp_src2.red)/4;
+                temp.green += (temp_src1.green + temp_src2.green)/4;
+                temp.blue += (temp_src1.blue + temp_src2.blue)/4;
+            }
 
+            dst[RIDX(i, j, dim_2)] = temp;
+        }
 }
 
 /******************************************************************************
