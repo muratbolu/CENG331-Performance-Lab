@@ -1,0 +1,15 @@
+*
+
+!.gitignore
+!README.md
+!Ceng331_Performance_Lab.pdf
+!clock.c
+!clock.h
+!config.h
+!defs.h
+!driver.c
+!fcyc.c
+!fcyc.h
+!kernels.c
+!Makefile
+
