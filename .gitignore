@@ -2,7 +2,8 @@
 
 !.gitignore
 !README.md
-!Ceng331_Performance_Lab.pdf
+
+!Makefile
 !clock.c
 !clock.h
 !config.h
@@ -11,5 +12,6 @@
 !fcyc.c
 !fcyc.h
 !kernels.c
-!Makefile
 
+!Ceng331_Performance_Lab.pdf
+!PerfLabRecit.pdf
