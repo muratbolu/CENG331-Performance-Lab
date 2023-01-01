@@ -58,56 +58,31 @@ char convolution_descr[] = "Convolution: Current working version";
 void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
 
-    int i,j,k,sum,sum_red,sum_green,sum_blue,src_index=0;
+    unsigned i,j,k,l,sum,src_index=0,ker_index;
 
     for(i = 0; i < dim-8+1; i++) {
         for(j = 0; j < dim-8+1; j++) {
-            sum_red = 0;
-            sum_green = 0;
-            sum_blue = 0;
-            for(k = 0; k < 64; k+=8) {
-                sum_red   += src[src_index].red * ker[k].red;
-                sum_green += src[src_index].green * ker[k].green;
-                sum_blue  += src[src_index].blue * ker[k].blue;
-
-                sum_red   += src[src_index+1].red * ker[k+1].red;
-                sum_green += src[src_index+1].green * ker[k+1].green;
-                sum_blue  += src[src_index+1].blue * ker[k+1].blue;
-
-                sum_red   += src[src_index+2].red * ker[k+2].red;
-                sum_green += src[src_index+2].green * ker[k+2].green;
-                sum_blue  += src[src_index+2].blue * ker[k+2].blue;
-
-                sum_red   += src[src_index+3].red * ker[k+3].red;
-                sum_green += src[src_index+3].green * ker[k+3].green;
-                sum_blue  += src[src_index+3].blue * ker[k+3].blue;
-
-                sum_red   += src[src_index+4].red * ker[k+4].red;
-                sum_green += src[src_index+4].green * ker[k+4].green;
-                sum_blue  += src[src_index+4].blue * ker[k+4].blue;
-
-                sum_red   += src[src_index+5].red * ker[k+5].red;
-                sum_green += src[src_index+5].green * ker[k+5].green;
-                sum_blue  += src[src_index+5].blue * ker[k+5].blue;
-
-                sum_red   += src[src_index+6].red * ker[k+6].red;
-                sum_green += src[src_index+6].green * ker[k+6].green;
-                sum_blue  += src[src_index+6].blue * ker[k+6].blue;
-
-                sum_red   += src[src_index+7].red * ker[k+7].red;
-                sum_green += src[src_index+7].green * ker[k+7].green;
-                sum_blue  += src[src_index+7].blue * ker[k+7].blue;
-
-                src_index += dim;
+            sum = 0;
+            ker_index = 0;
+            for(k = 0; k < 8; k++) {
+                for(l = 0; l < 8; l++) {
+                    sum += src[src_index].red
+                         * ker[ker_index].red
+                         + src[src_index].green
+                         * ker[ker_index].green
+                         + src[src_index].blue
+                         * ker[ker_index].blue;
+                    ++src_index;
+                    ++ker_index;
+                }
+                src_index += dim-8;
             }
-            sum = sum_red + sum_green + sum_blue;
             src_index -= (dim << 3);
             dst[src_index++] = sum;
         }
         src_index += 7;
     }
 }
-
 
 void convolution_using_stack(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
