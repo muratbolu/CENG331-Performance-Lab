@@ -58,72 +58,124 @@ char convolution_descr[] = "Convolution: Current working version";
 void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
 
-    int i,j,k,l,sum,src_index=0,ker_index;
+    int i,j,k,sum,sum_red,sum_green,sum_blue,src_index=0;
 
     for(i = 0; i < dim-8+1; i++) {
         for(j = 0; j < dim-8+1; j++) {
-            sum = 0;
-            ker_index = 0;
-            for(k = 0; k < 8; k++) {
-                sum += src[src_index].red
-                     * ker[ker_index].red;
-                sum += src[src_index].green
-                     * ker[ker_index].green;
-                sum += src[src_index].blue
-                     * ker[ker_index].blue;
+            sum_red = 0;
+            sum_green = 0;
+            sum_blue = 0;
+            for(k = 0; k < 64; k+=8) {
+                sum_red   += src[src_index].red * ker[k].red;
+                sum_green += src[src_index].green * ker[k].green;
+                sum_blue  += src[src_index].blue * ker[k].blue;
 
-                sum += src[src_index+1].red
-                     * ker[ker_index+1].red;
-                sum += src[src_index+1].green
-                     * ker[ker_index+1].green;
-                sum += src[src_index+1].blue
-                     * ker[ker_index+1].blue;
+                sum_red   += src[src_index+1].red * ker[k+1].red;
+                sum_green += src[src_index+1].green * ker[k+1].green;
+                sum_blue  += src[src_index+1].blue * ker[k+1].blue;
 
-                sum += src[src_index+2].red
-                     * ker[ker_index+2].red;
-                sum += src[src_index+2].green
-                     * ker[ker_index+2].green;
-                sum += src[src_index+2].blue
-                     * ker[ker_index+2].blue;
+                sum_red   += src[src_index+2].red * ker[k+2].red;
+                sum_green += src[src_index+2].green * ker[k+2].green;
+                sum_blue  += src[src_index+2].blue * ker[k+2].blue;
 
-                sum += src[src_index+3].red
-                     * ker[ker_index+3].red;
-                sum += src[src_index+3].green
-                     * ker[ker_index+3].green;
-                sum += src[src_index+3].blue
-                     * ker[ker_index+3].blue;
+                sum_red   += src[src_index+3].red * ker[k+3].red;
+                sum_green += src[src_index+3].green * ker[k+3].green;
+                sum_blue  += src[src_index+3].blue * ker[k+3].blue;
 
-                sum += src[src_index+4].red
-                     * ker[ker_index+4].red;
-                sum += src[src_index+4].green
-                     * ker[ker_index+4].green;
-                sum += src[src_index+4].blue
-                     * ker[ker_index+4].blue;
+                sum_red   += src[src_index+4].red * ker[k+4].red;
+                sum_green += src[src_index+4].green * ker[k+4].green;
+                sum_blue  += src[src_index+4].blue * ker[k+4].blue;
 
-                sum += src[src_index+5].red
-                     * ker[ker_index+5].red;
-                sum += src[src_index+5].green
-                     * ker[ker_index+5].green;
-                sum += src[src_index+5].blue
-                     * ker[ker_index+5].blue;
+                sum_red   += src[src_index+5].red * ker[k+5].red;
+                sum_green += src[src_index+5].green * ker[k+5].green;
+                sum_blue  += src[src_index+5].blue * ker[k+5].blue;
 
-                sum += src[src_index+6].red
-                     * ker[ker_index+6].red;
-                sum += src[src_index+6].green
-                     * ker[ker_index+6].green;
-                sum += src[src_index+6].blue
-                     * ker[ker_index+6].blue;
+                sum_red   += src[src_index+6].red * ker[k+6].red;
+                sum_green += src[src_index+6].green * ker[k+6].green;
+                sum_blue  += src[src_index+6].blue * ker[k+6].blue;
 
-                sum += src[src_index+7].red
-                     * ker[ker_index+7].red;
-                sum += src[src_index+7].green
-                     * ker[ker_index+7].green;
-                sum += src[src_index+7].blue
-                     * ker[ker_index+7].blue;
+                sum_red   += src[src_index+7].red * ker[k+7].red;
+                sum_green += src[src_index+7].green * ker[k+7].green;
+                sum_blue  += src[src_index+7].blue * ker[k+7].blue;
 
                 src_index += dim;
-                ker_index += 8;
             }
+            sum = sum_red + sum_green + sum_blue;
+            src_index -= (dim << 3);
+            dst[src_index++] = sum;
+        }
+        src_index += 7;
+    }
+}
+
+
+void convolution_using_stack(int dim, pixel *src, pixel *ker, unsigned *dst)
+{
+
+    int i,j,k,sum,
+        sum_red_0, sum_green_0, sum_blue_0,
+        sum_red_1, sum_green_1, sum_blue_1,
+        sum_red_2, sum_green_2, sum_blue_2,
+        sum_red_3, sum_green_3, sum_blue_3,
+        sum_red_4, sum_green_4, sum_blue_4,
+        sum_red_5, sum_green_5, sum_blue_5,
+        sum_red_6, sum_green_6, sum_blue_6,
+        sum_red_7, sum_green_7, sum_blue_7,
+        src_index=0;
+
+    for(i = 0; i < dim-8+1; i++) {
+        for(j = 0; j < dim-8+1; j++) {
+            sum_red_0 = 0; sum_green_0 = 0; sum_blue_0 = 0;
+            sum_red_1 = 0; sum_green_1 = 0; sum_blue_1 = 0;
+            sum_red_2 = 0; sum_green_2 = 0; sum_blue_2 = 0;
+            sum_red_3 = 0; sum_green_3 = 0; sum_blue_3 = 0;
+            sum_red_4 = 0; sum_green_4 = 0; sum_blue_4 = 0;
+            sum_red_5 = 0; sum_green_5 = 0; sum_blue_5 = 0;
+            sum_red_6 = 0; sum_green_6 = 0; sum_blue_6 = 0;
+            sum_red_7 = 0; sum_green_7 = 0; sum_blue_7 = 0;
+            for(k = 0; k < 64; k+=8) {
+                sum_red_0   += src[src_index].red * ker[k].red;
+                sum_green_0 += src[src_index].green * ker[k].green;
+                sum_blue_0  += src[src_index].blue * ker[k].blue;
+
+                sum_red_1   += src[src_index+1].red * ker[k+1].red;
+                sum_green_1 += src[src_index+1].green * ker[k+1].green;
+                sum_blue_1  += src[src_index+1].blue * ker[k+1].blue;
+
+                sum_red_2   += src[src_index+2].red * ker[k+2].red;
+                sum_green_2 += src[src_index+2].green * ker[k+2].green;
+                sum_blue_2  += src[src_index+2].blue * ker[k+2].blue;
+
+                sum_red_3   += src[src_index+3].red * ker[k+3].red;
+                sum_green_3 += src[src_index+3].green * ker[k+3].green;
+                sum_blue_3  += src[src_index+3].blue * ker[k+3].blue;
+
+                sum_red_4   += src[src_index+4].red * ker[k+4].red;
+                sum_green_4 += src[src_index+4].green * ker[k+4].green;
+                sum_blue_4  += src[src_index+4].blue * ker[k+4].blue;
+
+                sum_red_5   += src[src_index+5].red * ker[k+5].red;
+                sum_green_5 += src[src_index+5].green * ker[k+5].green;
+                sum_blue_5  += src[src_index+5].blue * ker[k+5].blue;
+
+                sum_red_6   += src[src_index+6].red * ker[k+6].red;
+                sum_green_6 += src[src_index+6].green * ker[k+6].green;
+                sum_blue_6  += src[src_index+6].blue * ker[k+6].blue;
+
+                sum_red_7   += src[src_index+7].red * ker[k+7].red;
+                sum_green_7 += src[src_index+7].green * ker[k+7].green;
+                sum_blue_7  += src[src_index+7].blue * ker[k+7].blue;
+
+                src_index += dim;
+            }
+            sum = sum_red_0 + sum_green_0 + sum_blue_0
+                + sum_red_1 + sum_green_1 + sum_blue_1
+                + sum_red_2 + sum_green_2 + sum_blue_2
+                + sum_red_3 + sum_green_3 + sum_blue_3
+                + sum_red_4 + sum_green_4 + sum_blue_4
+                + sum_red_5 + sum_green_5 + sum_blue_5
+                + sum_red_6 + sum_green_6 + sum_blue_6
+                + sum_red_7 + sum_green_7 + sum_blue_7;
             src_index -= (dim << 3);
             dst[src_index++] = sum;
         }
