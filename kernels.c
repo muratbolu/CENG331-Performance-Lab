@@ -529,7 +529,7 @@ void old_average_pooling(int dim, pixel *src, pixel *dst)
 char seq_average_pooling_descr[] = "Average Pooling: reducing sequential dependency";
 void seq_average_pooling(int dim, pixel *src, pixel *dst)
 {
-    int i,j,k,i1,j1, dim_2, B = 16;
+    int i,j,i1,j1, dim_2, B = 16;
     dim_2 = dim >> 1;
     for(i = 0; i < dim_2; i+= B){
         int i_bound = i + B;
@@ -581,7 +581,7 @@ void seq_average_pooling(int dim, pixel *src, pixel *dst)
 char test_average_pooling_descr[] = "Average Pooling: test version";
 void test_average_pooling(int dim, pixel *src, pixel *dst)
 {
-    int i,j,k,i1,j1, dim_2, B = 16;
+    int i,j,i1,j1, dim_2, B = 16;
     dim_2 = dim >> 1;
     for(i = 0; i < dim_2; i+= B){
         int i_bound = i + B;
@@ -626,7 +626,7 @@ char average_pooling_descr[] = "Average Pooling: Current working version";
 void average_pooling(int dim, pixel *src, pixel *dst)
 {
 
-    int i,j,k, dim_2;
+    int i,j, dim_2;
     int dst_index = 0, index = 0;
     dim_2 = dim >> 1;
     for(i = 0; i < dim_2; i++){
