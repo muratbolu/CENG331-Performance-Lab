@@ -499,6 +499,11 @@ void naive_average_pooling(int dim, pixel *src, pixel *dst) {
 char old_average_pooling_descr[] = "Average Pooling: old version";
 
 void old_average_pooling(int dim, pixel *src, pixel *dst)
+
+
+char old_average_pooling_descr[] = "Average Pooling: old version";
+
+void old_average_pooling(int dim, pixel *src, pixel *dst)
 {
 
     int i,j,k,i2 = 0,j2 = 0, dim_2, index;
@@ -527,6 +532,10 @@ void old_average_pooling(int dim, pixel *src, pixel *dst)
         i2 += 2;
     }
 }
+
+
+
+
 
 char seq_average_pooling_descr[] = "Average Pooling: reducing sequential dependency";
 void seq_average_pooling(int dim, pixel *src, pixel *dst)
