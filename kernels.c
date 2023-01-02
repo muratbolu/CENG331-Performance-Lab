@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 /********************************************************
  * Kernels to be optimized for the CS:APP Performance Lab
  ********************************************************/
@@ -7,9 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "defs.h"
-
-#define MY_RIDX(i,dim) ((i) * (dim))
-
 
 #define MY_RIDX(i,dim) ((i) * (dim))
 
@@ -28,7 +23,6 @@ team_t team = {
         "",             /* Third student ID */
         ""            /* Third student Name */
 };
-
 
 /********************
  * CONVOLUTION KERNEL
@@ -462,9 +456,6 @@ void register_conv_functions() {
     /* ... Register additional test functions here */
 }
 
-
-
-
 /************************
  * AVERAGE POOLING KERNEL
  ************************/
@@ -536,10 +527,6 @@ void old_average_pooling(int dim, pixel *src, pixel *dst)
         i2 += 2;
     }
 }
-
-
-
-
 
 char seq_average_pooling_descr[] = "Average Pooling: reducing sequential dependency";
 void seq_average_pooling(int dim, pixel *src, pixel *dst)
@@ -718,168 +705,3 @@ void register_average_pooling_functions() {
     }
 }
 */
-=======
-/********************************************************
- * Kernels to be optimized for the CS:APP Performance Lab
- ********************************************************/
-
-#include <stdio.h>
-#include <stdlib.h>
-#include "defs.h"
-/*
- * Please fill in the following team_t struct
- */
-team_t team = {
-        "TEAM",    /* Team Name */
-
-        "e252130",      /* First student ID */
-        "MURAT BOLU",       /* First student name */
-
-        "e244906",             /* Second student ID */
-        "UMUT YILMAZ",           /* Second student name */
-
-        "",             /* Third student ID */
-        ""            /* Third student Name */
-};
-
-
-/********************
- * CONVOLUTION KERNEL
- ********************/
-
-/***************************************************************
- * Your different versions of the convolution functions  go here
- ***************************************************************/
-
-/*
- * naive_conv - The naive baseline version of convolution
- */
-char naive_conv_descr[] = "naive_conv: Naive baseline implementation";
-void naive_conv(int dim, pixel *src, pixel *ker, unsigned *dst) {
-    int i,j,k,l;
-
-    for(i = 0; i < dim-8+1; i++)
-        for(j = 0; j < dim-8+1; j++) {
-            dst[RIDX(i, j, dim)] = 0;
-            for(k = 0; k < 8; k++)
-                for(l = 0; l < 8; l++) {
-                    dst[RIDX(i, j, dim)] += src[RIDX((i+k),(j+l), dim)].red * ker[RIDX(k, l, 8)].red;
-                    dst[RIDX(i, j, dim)] += src[RIDX((i+k),(j+l), dim)].green * ker[RIDX(k, l, 8)].green;
-                    dst[RIDX(i, j, dim)] += src[RIDX((i+k),(j+l), dim)].blue * ker[RIDX(k, l, 8)].blue;
-                }
-
-        }
-}
-
-/*
- * convolution - Your current working version of convolution
- * IMPORTANT: This is the version you will be graded on
- */
-char convolution_descr[] = "Convolution: Current working version";
-void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
-{
-
-    int i,j,k,l,sum,src_index=0,ker_index;
-
-    for(i = 0; i < dim-8+1; i++) {
-        for(j = 0; j < dim-8+1; j++) {
-            sum = 0;
-            ker_index = 0;
-            for(k = 0; k < 8; k++) {
-                for(l = 0; l < 8; l++) {
-                    sum += src[src_index].red
-                         * ker[ker_index].red;
-                    sum += src[src_index].green
-                         * ker[ker_index].green;
-                    sum += src[src_index].blue
-                         * ker[ker_index].blue;
-                    ++src_index;
-                    ++ker_index;
-                }
-                src_index += dim-8;
-            }
-            src_index -= (dim << 3);
-            dst[src_index++] = sum;
-        }
-        src_index += 7;
-    }
-}
-
-/*********************************************************************
- * register_conv_functions - Register all of your different versions
- *     of the convolution functions  with the driver by calling the
- *     add_conv_function() for each test function. When you run the
- *     driver program, it will test and report the performance of each
- *     registered test function.
- *********************************************************************/
-
-void register_conv_functions() {
-    add_conv_function(&naive_conv, naive_conv_descr);
-    add_conv_function(&convolution, convolution_descr);
-    /* ... Register additional test functions here */
-}
-
-
-
-
-/************************
- * AVERAGE POOLING KERNEL
- ************************/
-
-/*********************************************************
- * Your different versions of the average pooling  go here
- *********************************************************/
-
-/*
- * naive_average_pooling - The naive baseline version of average pooling
- */
-char naive_average_pooling_descr[] = "Naive Average Pooling: Naive baseline implementation";
-void naive_average_pooling(int dim, pixel *src, pixel *dst) {
-    int i,j,k,l;
-
-    for(i = 0; i < dim/2; i++)
-        for(j = 0; j < dim/2; j++) {
-            dst[RIDX(i, j, dim/2)].red = 0;
-            dst[RIDX(i, j, dim/2)].green = 0;
-            dst[RIDX(i, j, dim/2)].blue = 0;
-            for(k = 0; k < 2; k++) {
-                for (l = 0; l < 2; l++) {
-                    dst[RIDX(i, j, dim/2)].red += src[RIDX(i*2 + k, j*2 + l, dim)].red;
-                    dst[RIDX(i, j, dim/2)].green += src[RIDX(i*2 + k, j*2 + l, dim)].green;
-                    dst[RIDX(i, j, dim/2)].blue += src[RIDX(i*2 + k, j*2 + l, dim)].blue;
-                }
-            }
-            dst[RIDX(i, j, dim/2)].red /= 4;
-            dst[RIDX(i, j, dim/2)].green /= 4;
-            dst[RIDX(i, j, dim/2)].blue /= 4;
-        }
-}
-
-
-/*
- * average_pooling - Your current working version of average_pooling
- * IMPORTANT: This is the version you will be graded on
- */
-char average_pooling_descr[] = "Average Pooling: Current working version";
-void average_pooling(int dim, pixel *src, pixel *dst)
-{
-
-    naive_average_pooling(dim,src,dst);
-
-}
-
-/******************************************************************************
- * register_average_pooling_functions - Register all of your different versions
- *     of the average pooling  with the driver by calling the
- *     add_average_pooling_function() for each test function. When you run the
- *     driver program, it will test and report the performance of each
- *     registered test function.  
- ******************************************************************************/
-
-void register_average_pooling_functions() {
-    add_average_pooling_function(&naive_average_pooling, naive_average_pooling_descr);
-    add_average_pooling_function(&average_pooling, average_pooling_descr);
-    /* ... Register additional test functions here */
-}
-
->>>>>>> fd46874 (Finish avoiding multiplication)
