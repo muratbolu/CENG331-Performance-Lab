@@ -58,26 +58,19 @@ char convolution_descr[] = "Convolution: Current working version";
 void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
 
-    unsigned i,j,k,l,sum,src_index=0,ker_index;
+    unsigned i,j,k,sum,src_index=0;
 
     for(i = 0; i < dim-8+1; i++) {
         for(j = 0; j < dim-8+1; j++) {
             sum = 0;
-            ker_index = 0;
-            for(k = 0; k < 8; k++) {
-                for(l = 0; l < 8; l++) {
-                    sum += src[src_index].red
-                         * ker[ker_index].red
-                         + src[src_index].green
-                         * ker[ker_index].green
-                         + src[src_index].blue
-                         * ker[ker_index].blue;
-                    ++src_index;
-                    ++ker_index;
-                }
-                src_index += dim-8;
+            for(k = 0; k < 64; k++) {
+                sum += src[src_index].red * ker[k].red;
+                sum += src[src_index].green * ker[k].green;
+                sum += src[src_index].blue * ker[k].blue;
+                src_index += ((k & 7) == 7 ? dim-7 : 1);
             }
             src_index -= (dim << 3);
+
             dst[src_index++] = sum;
         }
         src_index += 7;
