@@ -187,37 +187,15 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
     for (i = 0; i < size; i++) {
         n = m;
         n1 = n;
-        k0r = ker[0].red;
-        k0g = ker[0].green; 
-        k0b = ker[0].blue;
 
-        k1r = ker[1].red;
-        k1g = ker[1].green;
-        k1b = ker[1].blue;
-
-        k2r = ker[2].red;
-        k2g = ker[2].green;
-        k2b = ker[2].blue;
-
-        k3r = ker[3].red;
-        k3g = ker[3].green;
-        k3b = ker[3].blue;
-
-        k4r = ker[4].red;
-        k4g = ker[4].green;
-        k4b = ker[4].blue;
-
-        k5r = ker[5].red;
-        k5g = ker[5].green;
-        k5b = ker[5].blue;
-
-        k6r = ker[6].red;
-        k6g = ker[6].green;
-        k6b = ker[6].blue;
-
-        k7r = ker[7].red;
-        k7g = ker[7].green;
-        k7b = ker[7].blue;
+        k0r = ker[0].red; k0g = ker[0].green;  k0b = ker[0].blue;
+        k1r = ker[1].red; k1g = ker[1].green; k1b = ker[1].blue;
+        k2r = ker[2].red; k2g = ker[2].green; k2b = ker[2].blue;
+        k3r = ker[3].red; k3g = ker[3].green; k3b = ker[3].blue;
+        k4r = ker[4].red; k4g = ker[4].green; k4b = ker[4].blue;
+        k5r = ker[5].red; k5g = ker[5].green; k5b = ker[5].blue;
+        k6r = ker[6].red; k6g = ker[6].green; k6b = ker[6].blue;
+        k7r = ker[7].red; k7g = ker[7].green; k7b = ker[7].blue;
         for (j = 0; j < size; j++) { 
             s1 = src[n1].red * k0r + src[n1].green * k0g + src[n1].blue * k0b+
             src[n1 + 1].red * k1r + src[n1 + 1].green * k1g + src[n1 + 1].blue * k1b +
@@ -231,38 +209,15 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         }
         zet = dim + n;
         n2 = n;
-
-        k0r = ker[8].red;
-        k0g = ker[8].green; 
-        k0b = ker[8].blue;
-
-        k1r = ker[9].red;
-        k1g = ker[9].green;
-        k1b = ker[9].blue;
-
-        k2r = ker[10].red;
-        k2g = ker[10].green;
-        k2b = ker[10].blue;
-
-        k3r = ker[11].red;
-        k3g = ker[11].green;
-        k3b = ker[11].blue;
-
-        k4r = ker[12].red;
-        k4g = ker[12].green;
-        k4b = ker[12].blue;
-
-        k5r = ker[13].red;
-        k5g = ker[13].green;
-        k5b = ker[13].blue;
-
-        k6r = ker[14].red;
-        k6g = ker[14].green;
-        k6b = ker[14].blue;
-
-        k7r = ker[15].red;
-        k7g = ker[15].green;
-        k7b = ker[15].blue;
+        
+        k0r = ker[8].red; k0g = ker[8].green; k0b = ker[8].blue;
+        k1r = ker[9].red;k1g = ker[9].green;k1b = ker[9].blue;
+        k2r = ker[10].red;k2g = ker[10].green;k2b = ker[10].blue;
+        k3r = ker[11].red;k3g = ker[11].green;k3b = ker[11].blue;
+        k4r = ker[12].red;k4g = ker[12].green;k4b = ker[12].blue;
+        k5r = ker[13].red;k5g = ker[13].green;k5b = ker[13].blue;
+        k6r = ker[14].red;k6g = ker[14].green;k6b = ker[14].blue;
+        k7r = ker[15].red;k7g = ker[15].green;k7b = ker[15].blue;
         for(j = 0; j < size; j++){
             s2 = src[zet].red * k0r+ src[zet].green * k0g + src[zet].blue * k0b +
             src[zet + 1].red * k1r+ src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
@@ -278,37 +233,14 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = (dim << 1) + n; 
         n3 = n;
 
-        k0r = ker[16].red;
-        k0g = ker[16].green; 
-        k0b = ker[16].blue;
-
-        k1r = ker[17].red;
-        k1g = ker[17].green;
-        k1b = ker[17].blue;
-
-        k2r = ker[18].red;
-        k2g = ker[18].green;
-        k2b = ker[18].blue;
-
-        k3r = ker[19].red;
-        k3g = ker[19].green;
-        k3b = ker[19].blue;
-
-        k4r = ker[20].red;
-        k4g = ker[20].green;
-        k4b = ker[20].blue;
-
-        k5r = ker[21].red;
-        k5g = ker[21].green;
-        k5b = ker[21].blue;
-
-        k6r = ker[22].red;
-        k6g = ker[22].green;
-        k6b = ker[22].blue;
-
-        k7r = ker[23].red;
-        k7g = ker[23].green;
-        k7b = ker[23].blue;
+        k0r = ker[16].red; k0g = ker[16].green;  k0b = ker[16].blue;
+        k1r = ker[17].red; k1g = ker[17].green; k1b = ker[17].blue;
+        k2r = ker[18].red; k2g = ker[18].green; k2b = ker[18].blue;
+        k3r = ker[19].red; k3g = ker[19].green; k3b = ker[19].blue;
+        k4r = ker[20].red; k4g = ker[20].green; k4b = ker[20].blue;
+        k5r = ker[21].red; k5g = ker[21].green; k5b = ker[21].blue;
+        k6r = ker[22].red; k6g = ker[22].green; k6b = ker[22].blue;
+        k7r = ker[23].red; k7g = ker[23].green; k7b = ker[23].blue;
         for (int j = 0; j < size; j++) {
             s3 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
@@ -324,37 +256,14 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 3 * dim + n;
         n4 = n;
 
-        k0r = ker[24].red;
-        k0g = ker[24].green; 
-        k0b = ker[24].blue;
-
-        k1r = ker[25].red;
-        k1g = ker[25].green;
-        k1b = ker[25].blue;
-
-        k2r = ker[26].red;
-        k2g = ker[26].green;
-        k2b = ker[26].blue;
-
-        k3r = ker[27].red;
-        k3g = ker[27].green;
-        k3b = ker[27].blue;
-
-        k4r = ker[28].red;
-        k4g = ker[28].green;
-        k4b = ker[28].blue;
-
-        k5r = ker[29].red;
-        k5g = ker[29].green;
-        k5b = ker[29].blue;
-
-        k6r = ker[30].red;
-        k6g = ker[30].green;
-        k6b = ker[30].blue;
-
-        k7r = ker[31].red;
-        k7g = ker[31].green;
-        k7b = ker[31].blue;
+        k0r = ker[24].red; k0g = ker[24].green; k0b = ker[24].blue;
+        k1r = ker[25].red; k1g = ker[25].green; k1b = ker[25].blue;
+        k2r = ker[26].red; k2g = ker[26].green; k2b = ker[26].blue;
+        k3r = ker[27].red; k3g = ker[27].green; k3b = ker[27].blue;
+        k4r = ker[28].red; k4g = ker[28].green; k4b = ker[28].blue;
+        k5r = ker[29].red; k5g = ker[29].green; k5b = ker[29].blue;
+        k6r = ker[30].red; k6g = ker[30].green; k6b = ker[30].blue;
+        k7r = ker[31].red; k7g = ker[31].green; k7b = ker[31].blue;
         for(int j = 0; j < size; j++){
             s4 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
@@ -370,37 +279,14 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = (dim << 2) + n;
         n5 = n; 
 
-        k0r = ker[32].red;
-        k0g = ker[32].green; 
-        k0b = ker[32].blue;
-
-        k1r = ker[33].red;
-        k1g = ker[33].green;
-        k1b = ker[33].blue;
-
-        k2r = ker[34].red;
-        k2g = ker[34].green;
-        k2b = ker[34].blue;
-
-        k3r = ker[35].red;
-        k3g = ker[35].green;
-        k3b = ker[35].blue;
-
-        k4r = ker[36].red;
-        k4g = ker[36].green;
-        k4b = ker[36].blue;
-
-        k5r = ker[37].red;
-        k5g = ker[37].green;
-        k5b = ker[37].blue;
-
-        k6r = ker[38].red;
-        k6g = ker[38].green;
-        k6b = ker[38].blue;
-
-        k7r = ker[39].red;
-        k7g = ker[39].green;
-        k7b = ker[39].blue;
+        k0r = ker[32].red;k0g = ker[32].green; k0b = ker[32].blue;
+        k1r = ker[33].red;k1g = ker[33].green;k1b = ker[33].blue;
+        k2r = ker[34].red;k2g = ker[34].green;k2b = ker[34].blue;
+        k3r = ker[35].red;k3g = ker[35].green;k3b = ker[35].blue;
+        k4r = ker[36].red;k4g = ker[36].green;k4b = ker[36].blue;
+        k5r = ker[37].red;k5g = ker[37].green;k5b = ker[37].blue;
+        k6r = ker[38].red;k6g = ker[38].green;k6b = ker[38].blue;
+        k7r = ker[39].red;k7g = ker[39].green;k7b = ker[39].blue;
         for(int j = 0;j < size; j++){
             s5 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
@@ -416,37 +302,14 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 5 * dim + n;
         n6 = n;
 
-        k0r = ker[40].red;
-        k0g = ker[40].green; 
-        k0b = ker[40].blue;
-
-        k1r = ker[41].red;
-        k1g = ker[41].green;
-        k1b = ker[41].blue;
-
-        k2r = ker[42].red;
-        k2g = ker[42].green;
-        k2b = ker[42].blue;
-
-        k3r = ker[43].red;
-        k3g = ker[43].green;
-        k3b = ker[43].blue;
-
-        k4r = ker[44].red;
-        k4g = ker[44].green;
-        k4b = ker[44].blue;
-
-        k5r = ker[45].red;
-        k5g = ker[45].green;
-        k5b = ker[45].blue;
-
-        k6r = ker[46].red;
-        k6g = ker[46].green;
-        k6b = ker[46].blue;
-
-        k7r = ker[47].red;
-        k7g = ker[47].green;
-        k7b = ker[47].blue;
+        k0r = ker[40].red; k0g = ker[40].green;  k0b = ker[40].blue;
+        k1r = ker[41].red; k1g = ker[41].green; k1b = ker[41].blue;
+        k2r = ker[42].red; k2g = ker[42].green; k2b = ker[42].blue;
+        k3r = ker[43].red; k3g = ker[43].green; k3b = ker[43].blue;
+        k4r = ker[44].red; k4g = ker[44].green; k4b = ker[44].blue;
+        k5r = ker[45].red; k5g = ker[45].green; k5b = ker[45].blue;
+        k6r = ker[46].red; k6g = ker[46].green; k6b = ker[46].blue;
+        k7r = ker[47].red; k7g = ker[47].green; k7b = ker[47].blue;
         for(int j = 0;j<size;j++){
             s6 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
@@ -462,37 +325,14 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 6 * dim + n; 
         n7 = n;
 
-        k0r = ker[48].red;
-        k0g = ker[48].green; 
-        k0b = ker[48].blue;
-
-        k1r = ker[49].red;
-        k1g = ker[49].green;
-        k1b = ker[49].blue;
-
-        k2r = ker[50].red;
-        k2g = ker[50].green;
-        k2b = ker[50].blue;
-
-        k3r = ker[51].red;
-        k3g = ker[51].green;
-        k3b = ker[51].blue;
-
-        k4r = ker[52].red;
-        k4g = ker[52].green;
-        k4b = ker[52].blue;
-
-        k5r = ker[53].red;
-        k5g = ker[53].green;
-        k5b = ker[53].blue;
-
-        k6r = ker[54].red;
-        k6g = ker[54].green;
-        k6b = ker[54].blue;
-
-        k7r = ker[55].red;
-        k7g = ker[55].green;
-        k7b = ker[55].blue;
+        k0r = ker[48].red; k0g = ker[48].green;  k0b = ker[48].blue;
+        k1r = ker[49].red; k1g = ker[49].green; k1b = ker[49].blue;
+        k2r = ker[50].red; k2g = ker[50].green; k2b = ker[50].blue;
+        k3r = ker[51].red; k3g = ker[51].green; k3b = ker[51].blue;
+        k4r = ker[52].red; k4g = ker[52].green; k4b = ker[52].blue;
+        k5r = ker[53].red; k5g = ker[53].green; k5b = ker[53].blue;
+        k6r = ker[54].red; k6g = ker[54].green; k6b = ker[54].blue;
+        k7r = ker[55].red; k7g = ker[55].green; k7b = ker[55].blue;
         for(int j=0 ; j< size;j++){
             s7 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
@@ -508,38 +348,14 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 7 * dim + n;
         n8 = n;
 
-        k0r = ker[56].red;
-        k0g = ker[56].green; 
-        k0b = ker[56].blue;
-
-        k1r = ker[57].red;
-        k1g = ker[57].green;
-        k1b = ker[57].blue;
-
-        k2r = ker[58].red;
-        k2g = ker[58].green;
-        k2b = ker[58].blue;
-
-        k3r = ker[59].red;
-        k3g = ker[59].green;
-        k3b = ker[59].blue;
-
-        k4r = ker[60].red;
-        k4g = ker[60].green;
-        k4b = ker[60].blue;
-
-        k5r = ker[61].red;
-        k5g = ker[61].green;
-        k5b = ker[61].blue;
-
-        k6r = ker[62].red;
-        k6g = ker[62].green;
-        k6b = ker[62].blue;
-
-        k7r = ker[63].red;
-        k7g = ker[63].green;
-        k7b = ker[63].blue;
-
+        k0r = ker[56].red; k0g = ker[56].green; k0b = ker[56].blue;
+        k1r = ker[57].red; k1g = ker[57].green; k1b = ker[57].blue;
+        k2r = ker[58].red; k2g = ker[58].green; k2b = ker[58].blue;
+        k3r = ker[59].red; k3g = ker[59].green; k3b = ker[59].blue;
+        k4r = ker[60].red; k4g = ker[60].green; k4b = ker[60].blue;
+        k5r = ker[61].red; k5g = ker[61].green; k5b = ker[61].blue;
+        k6r = ker[62].red; k6g = ker[62].green; k6b = ker[62].blue;
+        k7r = ker[63].red; k7g = ker[63].green; k7b = ker[63].blue;
         for(int j=0;j<size;j++){
             s8 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
