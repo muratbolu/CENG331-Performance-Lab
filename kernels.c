@@ -79,294 +79,1001 @@ void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
     }
 }
 
-void convolution_completely_unrolled_doesnt_work(int dim, pixel *src, pixel *ker, unsigned *dst)
-{
 
-    unsigned i,sum=0;
-
-    for(i = 0; i < dim-7; i++) {
-
-    sum += src[i].red   * ker[0].red;
-    sum += src[i].green * ker[0].green;
-    sum += src[i].blue  * ker[0].blue;
-
-    sum += src[i+1].red   * ker[1].red;
-    sum += src[i+1].green * ker[1].green;
-    sum += src[i+1].blue  * ker[1].blue;
-
-    sum += src[i+2].red   * ker[2].red;
-    sum += src[i+2].green * ker[2].green;
-    sum += src[i+2].blue  * ker[2].blue;
-
-    sum += src[i+3].red   * ker[3].red;
-    sum += src[i+3].green * ker[3].green;
-    sum += src[i+3].blue  * ker[3].blue;
-
-    sum += src[i+4].red   * ker[4].red;
-    sum += src[i+4].green * ker[4].green;
-    sum += src[i+4].blue  * ker[4].blue;
-
-    sum += src[i+5].red   * ker[5].red;
-    sum += src[i+5].green * ker[5].green;
-    sum += src[i+5].blue  * ker[5].blue;
-
-    sum += src[i+6].red   * ker[6].red;
-    sum += src[i+6].green * ker[6].green;
-    sum += src[i+6].blue  * ker[6].blue;
-
-    sum += src[i+7].red   * ker[7].red;
-    sum += src[i+7].green * ker[7].green;
-    sum += src[i+7].blue  * ker[7].blue;
-
-    dst[i] = sum;
-    sum = 0;
-
-    sum += src[i+dim].red   * ker[8].red;
-    sum += src[i+dim].green * ker[8].green;
-    sum += src[i+dim].blue  * ker[8].blue;
-
-    sum += src[i+dim+1].red   * ker[9].red;
-    sum += src[i+dim+1].green * ker[9].green;
-    sum += src[i+dim+1].blue  * ker[9].blue;
-
-    sum += src[i+dim+2].red   * ker[10].red;
-    sum += src[i+dim+2].green * ker[10].green;
-    sum += src[i+dim+2].blue  * ker[10].blue;
-
-    sum += src[i+dim+3].red   * ker[11].red;
-    sum += src[i+dim+3].green * ker[11].green;
-    sum += src[i+dim+3].blue  * ker[11].blue;
-
-    sum += src[i+dim+4].red   * ker[12].red;
-    sum += src[i+dim+4].green * ker[12].green;
-    sum += src[i+dim+4].blue  * ker[12].blue;
-
-    sum += src[i+dim+5].red   * ker[13].red;
-    sum += src[i+dim+5].green * ker[13].green;
-    sum += src[i+dim+5].blue  * ker[13].blue;
-
-    sum += src[i+dim+6].red   * ker[14].red;
-    sum += src[i+dim+6].green * ker[14].green;
-    sum += src[i+dim+6].blue  * ker[14].blue;
-
-    sum += src[i+dim+7].red   * ker[15].red;
-    sum += src[i+dim+7].green * ker[15].green;
-    sum += src[i+dim+7].blue  * ker[15].blue;
-
-    dst[i+dim] = sum;
-    sum = 0;
-
-    sum += src[i+2*dim].red   * ker[16].red;
-    sum += src[i+2*dim].green * ker[16].green;
-    sum += src[i+2*dim].blue  * ker[16].blue;
-
-    sum += src[i+2*dim+1].red   * ker[17].red;
-    sum += src[i+2*dim+1].green * ker[17].green;
-    sum += src[i+2*dim+1].blue  * ker[17].blue;
-
-    sum += src[i+2*dim+2].red   * ker[18].red;
-    sum += src[i+2*dim+2].green * ker[18].green;
-    sum += src[i+2*dim+2].blue  * ker[18].blue;
-
-    sum += src[i+2*dim+3].red   * ker[19].red;
-    sum += src[i+2*dim+3].green * ker[19].green;
-    sum += src[i+2*dim+3].blue  * ker[19].blue;
-
-    sum += src[i+2*dim+4].red   * ker[20].red;
-    sum += src[i+2*dim+4].green * ker[20].green;
-    sum += src[i+2*dim+4].blue  * ker[20].blue;
-
-    sum += src[i+2*dim+5].red   * ker[21].red;
-    sum += src[i+2*dim+5].green * ker[21].green;
-    sum += src[i+2*dim+5].blue  * ker[21].blue;
-
-    sum += src[i+2*dim+6].red   * ker[22].red;
-    sum += src[i+2*dim+6].green * ker[22].green;
-    sum += src[i+2*dim+6].blue  * ker[22].blue;
-
-    sum += src[i+2*dim+7].red   * ker[23].red;
-    sum += src[i+2*dim+7].green * ker[23].green;
-    sum += src[i+2*dim+7].blue  * ker[23].blue;
-
-    dst[i+2*dim] = sum;
-    sum = 0;
-
-    sum += src[i+3*dim].red   * ker[24].red;
-    sum += src[i+3*dim].green * ker[24].green;
-    sum += src[i+3*dim].blue  * ker[24].blue;
-
-    sum += src[i+3*dim+1].red   * ker[25].red;
-    sum += src[i+3*dim+1].green * ker[25].green;
-    sum += src[i+3*dim+1].blue  * ker[25].blue;
-
-    sum += src[i+3*dim+2].red   * ker[26].red;
-    sum += src[i+3*dim+2].green * ker[26].green;
-    sum += src[i+3*dim+2].blue  * ker[26].blue;
-
-    sum += src[i+3*dim+3].red   * ker[27].red;
-    sum += src[i+3*dim+3].green * ker[27].green;
-    sum += src[i+3*dim+3].blue  * ker[27].blue;
-
-    sum += src[i+3*dim+4].red   * ker[28].red;
-    sum += src[i+3*dim+4].green * ker[28].green;
-    sum += src[i+3*dim+4].blue  * ker[28].blue;
-
-    sum += src[i+3*dim+5].red   * ker[29].red;
-    sum += src[i+3*dim+5].green * ker[29].green;
-    sum += src[i+3*dim+5].blue  * ker[29].blue;
-
-    sum += src[i+3*dim+6].red   * ker[30].red;
-    sum += src[i+3*dim+6].green * ker[30].green;
-    sum += src[i+3*dim+6].blue  * ker[30].blue;
-
-    sum += src[i+3*dim+7].red   * ker[31].red;
-    sum += src[i+3*dim+7].green * ker[31].green;
-    sum += src[i+3*dim+7].blue  * ker[31].blue;
-
-    dst[i+3*dim] = sum;
-    sum = 0;
-
-    sum += src[i+4*dim].red   * ker[32].red;
-    sum += src[i+4*dim].green * ker[32].green;
-    sum += src[i+4*dim].blue  * ker[32].blue;
-
-    sum += src[i+4*dim+1].red   * ker[33].red;
-    sum += src[i+4*dim+1].green * ker[33].green;
-    sum += src[i+4*dim+1].blue  * ker[33].blue;
-
-    sum += src[i+4*dim+2].red   * ker[34].red;
-    sum += src[i+4*dim+2].green * ker[34].green;
-    sum += src[i+4*dim+2].blue  * ker[34].blue;
-
-    sum += src[i+4*dim+3].red   * ker[35].red;
-    sum += src[i+4*dim+3].green * ker[35].green;
-    sum += src[i+4*dim+3].blue  * ker[35].blue;
-
-    sum += src[i+4*dim+4].red   * ker[36].red;
-    sum += src[i+4*dim+4].green * ker[36].green;
-    sum += src[i+4*dim+4].blue  * ker[36].blue;
-
-    sum += src[i+4*dim+5].red   * ker[37].red;
-    sum += src[i+4*dim+5].green * ker[37].green;
-    sum += src[i+4*dim+5].blue  * ker[37].blue;
-
-    sum += src[i+4*dim+6].red   * ker[38].red;
-    sum += src[i+4*dim+6].green * ker[38].green;
-    sum += src[i+4*dim+6].blue  * ker[38].blue;
-
-    sum += src[i+4*dim+7].red   * ker[39].red;
-    sum += src[i+4*dim+7].green * ker[39].green;
-    sum += src[i+4*dim+7].blue  * ker[39].blue;
-
-    dst[i+4*dim] = sum;
-    sum = 0;
-
-    sum += src[i+5*dim].red   * ker[40].red;
-    sum += src[i+5*dim].green * ker[40].green;
-    sum += src[i+5*dim].blue  * ker[40].blue;
-
-    sum += src[i+5*dim+1].red   * ker[41].red;
-    sum += src[i+5*dim+1].green * ker[41].green;
-    sum += src[i+5*dim+1].blue  * ker[41].blue;
-
-    sum += src[i+5*dim+2].red   * ker[42].red;
-    sum += src[i+5*dim+2].green * ker[42].green;
-    sum += src[i+5*dim+2].blue  * ker[42].blue;
-
-    sum += src[i+5*dim+3].red   * ker[43].red;
-    sum += src[i+5*dim+3].green * ker[43].green;
-    sum += src[i+5*dim+3].blue  * ker[43].blue;
-
-    sum += src[i+5*dim+4].red   * ker[44].red;
-    sum += src[i+5*dim+4].green * ker[44].green;
-    sum += src[i+5*dim+4].blue  * ker[44].blue;
-
-    sum += src[i+5*dim+5].red   * ker[45].red;
-    sum += src[i+5*dim+5].green * ker[45].green;
-    sum += src[i+5*dim+5].blue  * ker[45].blue;
-
-    sum += src[i+5*dim+6].red   * ker[46].red;
-    sum += src[i+5*dim+6].green * ker[46].green;
-    sum += src[i+5*dim+6].blue  * ker[46].blue;
-
-    sum += src[i+5*dim+7].red   * ker[47].red;
-    sum += src[i+5*dim+7].green * ker[47].green;
-    sum += src[i+5*dim+7].blue  * ker[47].blue;
-
-    dst[i+5*dim] = sum;
-    sum = 0;
-
-    sum += src[i+6*dim].red   * ker[48].red;
-    sum += src[i+6*dim].green * ker[48].green;
-    sum += src[i+6*dim].blue  * ker[48].blue;
-
-    sum += src[i+6*dim+1].red   * ker[49].red;
-    sum += src[i+6*dim+1].green * ker[49].green;
-    sum += src[i+6*dim+1].blue  * ker[49].blue;
-
-    sum += src[i+6*dim+2].red   * ker[50].red;
-    sum += src[i+6*dim+2].green * ker[50].green;
-    sum += src[i+6*dim+2].blue  * ker[50].blue;
-
-    sum += src[i+6*dim+3].red   * ker[51].red;
-    sum += src[i+6*dim+3].green * ker[51].green;
-    sum += src[i+6*dim+3].blue  * ker[51].blue;
-
-    sum += src[i+6*dim+4].red   * ker[52].red;
-    sum += src[i+6*dim+4].green * ker[52].green;
-    sum += src[i+6*dim+4].blue  * ker[52].blue;
-
-    sum += src[i+6*dim+5].red   * ker[53].red;
-    sum += src[i+6*dim+5].green * ker[53].green;
-    sum += src[i+6*dim+5].blue  * ker[53].blue;
-
-    sum += src[i+6*dim+6].red   * ker[54].red;
-    sum += src[i+6*dim+6].green * ker[54].green;
-    sum += src[i+6*dim+6].blue  * ker[54].blue;
-
-    sum += src[i+6*dim+7].red   * ker[55].red;
-    sum += src[i+6*dim+7].green * ker[55].green;
-    sum += src[i+6*dim+7].blue  * ker[55].blue;
-
-    dst[i+6*dim] = sum;
-    sum = 0;
-
-    sum += src[i+7*dim].red   * ker[56].red;
-    sum += src[i+7*dim].green * ker[56].green;
-    sum += src[i+7*dim].blue  * ker[56].blue;
-
-    sum += src[i+7*dim+1].red   * ker[57].red;
-    sum += src[i+7*dim+1].green * ker[57].green;
-    sum += src[i+7*dim+1].blue  * ker[57].blue;
-
-    sum += src[i+7*dim+2].red   * ker[58].red;
-    sum += src[i+7*dim+2].green * ker[58].green;
-    sum += src[i+7*dim+2].blue  * ker[58].blue;
-
-    sum += src[i+7*dim+3].red   * ker[59].red;
-    sum += src[i+7*dim+3].green * ker[59].green;
-    sum += src[i+7*dim+3].blue  * ker[59].blue;
-
-    sum += src[i+7*dim+4].red   * ker[60].red;
-    sum += src[i+7*dim+4].green * ker[60].green;
-    sum += src[i+7*dim+4].blue  * ker[60].blue;
-
-    sum += src[i+7*dim+5].red   * ker[61].red;
-    sum += src[i+7*dim+5].green * ker[61].green;
-    sum += src[i+7*dim+5].blue  * ker[61].blue;
-
-    sum += src[i+7*dim+6].red   * ker[62].red;
-    sum += src[i+7*dim+6].green * ker[62].green;
-    sum += src[i+7*dim+6].blue  * ker[62].blue;
-
-    sum += src[i+7*dim+7].red   * ker[63].red;
-    sum += src[i+7*dim+7].green * ker[63].green;
-    sum += src[i+7*dim+7].blue  * ker[63].blue;
-
-    dst[i+7*dim] = sum;
-    sum = 0;
+// BAHADIR'S VERSION
+
+char bahadir_convolution_descr[] = "Convolution: Bahadır version";
+void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
+    const int size = dim-7;
+    int m = 0;
+    int i,j,s1,s2,s3,s4,s5,s6,s7,s8,zet,n;
+    int n1,n2,n3,n4,n5,n6,n7,n8;
+    for (i = 0; i < size; i++) {
+        n = m;
+        n1 = n;
+        for (j = 0; j < size; j++) { 
+            __builtin_prefetch(&src[n1+8],0,0);
+            s1 = src[n1].red * ker[0].red + src[n1].green * ker[0].green + src[n1].blue * ker[0].blue +
+            src[n1 + 1].red * ker[1].red+ src[n1 + 1].green * ker[1].green+ src[n1 + 1].blue * ker[1].blue +
+            src[n1 + 2].red * ker[2].red+ src[n1 + 2].green * ker[2].green+ src[n1 + 2].blue * ker[2].blue+
+            src[n1 + 3].red * ker[3].red+ src[n1 + 3].green * ker[3].green+ src[n1 + 3].blue * ker[3].blue+
+            src[n1 + 4].red * ker[4].red+ src[n1 + 4].green * ker[4].green+ src[n1 + 4].blue * ker[4].blue+
+            src[n1 + 5].red * ker[5].red+ src[n1 + 5].green * ker[5].green+ src[n1 + 5].blue * ker[5].blue+
+            src[n1 + 6].red * ker[6].red+ src[n1 + 6].green * ker[6].green+ src[n1 + 6].blue * ker[6].blue+      
+            src[n1 + 7].red * ker[7].red+ src[n1 + 7].green * ker[7].green+ src[n1 + 7].blue * ker[7].blue;
+            dst[n1++] = s1;
+        }
+        zet = dim + n;
+        n2 = n;
+        for(j = 0; j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s2 = src[zet].red * ker[8].red + src[zet].green * ker[8].green + src[zet].blue * ker[8].blue +
+            src[zet + 1].red * ker[9].red + src[zet + 1].green * ker[9].green + src[zet + 1].blue * ker[9].blue +
+            src[zet + 2].red * ker[10].red + src[zet + 2].green * ker[10].green + src[zet + 2].blue * ker[10].blue +
+            src[zet + 3].red * ker[11].red + src[zet + 3].green * ker[11].green + src[zet + 3].blue * ker[11].blue +
+            src[zet + 4].red * ker[12].red + src[zet + 4].green * ker[12].green + src[zet + 4].blue * ker[12].blue +
+            src[zet + 5].red * ker[13].red + src[zet + 5].green * ker[13].green + src[zet + 5].blue * ker[13].blue +
+            src[zet + 6].red * ker[14].red + src[zet + 6].green * ker[14].green + src[zet + 6].blue * ker[14].blue +
+            src[zet + 7].red * ker[15].red + src[zet + 7].green * ker[15].green + src[zet + 7].blue * ker[15].blue;
+            dst[n2++] += s2;
+            zet++;
+        }
+        zet = (dim << 1) + n; 
+        n3 = n;
+        for (int j = 0; j < size; j++) {
+            __builtin_prefetch(&src[zet+8],0,0);
+            s3 = src[zet].red * ker[16].red + src[zet].green * ker[16].green + src[zet].blue * ker[16].blue +
+            src[zet + 1].red * ker[17].red + src[zet + 1].green * ker[17].green + src[zet + 1].blue * ker[17].blue +
+            src[zet + 2].red * ker[18].red + src[zet + 2].green * ker[18].green + src[zet + 2].blue * ker[18].blue +
+            src[zet + 3].red * ker[19].red + src[zet + 3].green * ker[19].green + src[zet + 3].blue * ker[19].blue +
+            src[zet + 4].red * ker[20].red + src[zet + 4].green * ker[20].green + src[zet + 4].blue * ker[20].blue +
+            src[zet + 5].red * ker[21].red  + src[zet + 5].green * ker[21].green + src[zet + 5].blue * ker[21].blue +
+            src[zet + 6].red * ker[22].red + src[zet + 6].green * ker[22].green + src[zet + 6].blue * ker[22].blue +
+            src[zet + 7].red * ker[23].red + src[zet + 7].green * ker[23].green + src[zet + 7].blue * ker[23].blue;
+            dst[n3++] += s3;
+            zet++;
+        }
+        zet = 3 * dim + n;
+        n4 = n;
+        for(int j = 0; j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s4 = src[zet].red * ker[24].red+ src[zet].green * ker[24].green+ src[zet].blue * ker[24].blue+
+            src[zet + 1].red * ker[25].red+ src[zet + 1].green * ker[25].green+ src[zet + 1].blue * ker[25].blue+
+            src[zet + 2].red * ker[26].red+ src[zet + 2].green * ker[26].green+ src[zet + 2].blue * ker[26].blue+
+            src[zet + 3].red * ker[27].red+ src[zet + 3].green * ker[27].green+ src[zet + 3].blue * ker[27].blue+
+            src[zet + 4].red * ker[28].red+ src[zet + 4].green * ker[28].green+ src[zet + 4].blue * ker[28].blue+
+            src[zet + 5].red * ker[29].red+ src[zet + 5].green * ker[29].green+ src[zet + 5].blue * ker[29].blue+
+            src[zet + 6].red * ker[30].red+ src[zet + 6].green * ker[30].green+ src[zet + 6].blue * ker[30].blue+
+            src[zet + 7].red * ker[31].red+ src[zet + 7].green * ker[31].green+ src[zet + 7].blue * ker[31].blue;
+            dst[n4++] += s4;
+            zet++;
+        }
+        zet = (dim << 2) + n;
+        n5 = n; 
+        for(int j = 0;j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s5 = src[zet].red * ker[32].red+ src[zet].green * ker[32].green+ src[zet].blue * ker[32].blue+
+            src[zet + 1].red * ker[33].red+ src[zet + 1].green * ker[33].green+ src[zet + 1].blue * ker[33].blue+
+            src[zet + 2].red * ker[34].red+ src[zet + 2].green * ker[34].green+ src[zet + 2].blue * ker[34].blue+
+            src[zet + 3].red * ker[35].red+ src[zet + 3].green * ker[35].green+ src[zet + 3].blue * ker[35].blue+
+            src[zet + 4].red * ker[36].red+ src[zet + 4].green * ker[36].green+ src[zet + 4].blue * ker[36].blue+
+            src[zet + 5].red * ker[37].red+ src[zet + 5].green * ker[37].green+ src[zet + 5].blue * ker[37].blue+
+            src[zet + 6].red * ker[38].red+ src[zet + 6].green * ker[38].green+ src[zet + 6].blue * ker[38].blue+
+            src[zet + 7].red * ker[39].red+ src[zet + 7].green * ker[39].green+ src[zet + 7].blue * ker[39].blue;
+            dst[n5++] += s5;
+            zet++;
+        }
+        zet = 5 * dim + n;
+        n6 = n;
+        for(int j = 0;j<size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s6 = src[zet].red * ker[40].red + src[zet].green * ker[40].green + src[zet].blue * ker[40].blue +
+            src[zet + 1].red * ker[41].red + src[zet + 1].green * ker[41].green + src[zet + 1].blue * ker[41].blue +
+            src[zet + 2].red * ker[42].red + src[zet + 2].green * ker[42].green + src[zet + 2].blue * ker[42].blue +
+            src[zet + 3].red * ker[43].red + src[zet + 3].green * ker[43].green + src[zet + 3].blue * ker[43].blue +
+            src[zet + 4].red * ker[44].red + src[zet + 4].green * ker[44].green + src[zet + 4].blue * ker[44].blue +
+            src[zet + 5].red * ker[45].red + src[zet + 5].green * ker[45].green + src[zet + 5].blue * ker[45].blue +
+            src[zet + 6].red * ker[46].red + src[zet + 6].green * ker[46].green + src[zet + 6].blue * ker[46].blue +
+            src[zet + 7].red * ker[47].red + src[zet + 7].green * ker[47].green + src[zet + 7].blue * ker[47].blue;
+            dst[n6++] += s6;
+            zet++;
+        }
+        zet = 6 * dim + n; 
+        n7 = n;
+        for(int j=0 ; j< size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s7 = src[zet].red * ker[48].red + src[zet].green * ker[48].green + src[zet].blue * ker[48].blue +
+            src[zet + 1].red * ker[49].red + src[zet + 1].green * ker[49].green + src[zet + 1].blue * ker[49].blue +
+            src[zet + 2].red * ker[50].red + src[zet + 2].green * ker[50].green + src[zet + 2].blue * ker[50].blue +
+            src[zet + 3].red * ker[51].red + src[zet + 3].green * ker[51].green + src[zet + 3].blue * ker[51].blue +
+            src[zet + 4].red * ker[52].red + src[zet + 4].green * ker[52].green + src[zet + 4].blue * ker[52].blue +
+            src[zet + 5].red * ker[53].red + src[zet + 5].green * ker[53].green + src[zet + 5].blue * ker[53].blue +
+            src[zet + 6].red * ker[54].red + src[zet + 6].green * ker[54].green + src[zet + 6].blue * ker[54].blue +
+            src[zet + 7].red * ker[55].red + src[zet + 7].green * ker[55].green + src[zet + 7].blue * ker[55].blue;
+            dst[n7++] += s7;
+            zet++;
+        }
+        zet = 7 * dim + n;
+        n8 = n;
+        for(int j=0;j<size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s8 = src[zet].red * ker[56].red + src[zet].green * ker[56].green + src[zet].blue * ker[56].blue +
+            src[zet + 1].red * ker[57].red + src[zet + 1].green * ker[57].green + src[zet + 1].blue * ker[57].blue +
+            src[zet + 2].red * ker[58].red + src[zet + 2].green * ker[58].green + src[zet + 2].blue * ker[58].blue +
+            src[zet + 3].red * ker[59].red + src[zet + 3].green * ker[59].green + src[zet + 3].blue * ker[59].blue +
+            src[zet + 4].red * ker[60].red + src[zet + 4].green * ker[60].green + src[zet + 4].blue * ker[60].blue +
+            src[zet + 5].red * ker[61].red + src[zet + 5].green * ker[61].green + src[zet + 5].blue * ker[61].blue +
+            src[zet + 6].red * ker[62].red + src[zet + 6].green * ker[62].green + src[zet + 6].blue * ker[62].blue +
+            src[zet + 7].red * ker[63].red + src[zet + 7].green * ker[63].green + src[zet + 7].blue * ker[63].blue;
+            dst[n8++] += s8;
+            zet++;
+        }
+
+        m += dim;
     }
 }
+
+char bahadir_convolution_descrV3[] = "Bahadır Version: Store kernel variables in tmp vars.";
+void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
+    const int size = dim-7;
+    int m = 0;
+    int i,j,s1,s2,s3,s4,s5,s6,s7,s8,zet,n;
+    int n1,n2,n3,n4,n5,n6,n7,n8;
+    int k0r,k0g,k0b,k1r,k1g,k1b,k2r,k2g,k2b,k3r,k3g,k3b,k4r,k4g,k4b,k5r,k5g,k5b,k6r,k6g,k6b,k7r,k7g,k7b;
+    for (i = 0; i < size; i++) {
+        n = m;
+        n1 = n;
+
+        
+
+        k0r = ker[0].red;
+        k0g = ker[0].green; 
+        k0b = ker[0].blue;
+
+        k1r = ker[1].red;
+        k1g = ker[1].green;
+        k1b = ker[1].blue;
+
+        k2r = ker[2].red;
+        k2g = ker[2].green;
+        k2b = ker[2].blue;
+
+        k3r = ker[3].red;
+        k3g = ker[3].green;
+        k3b = ker[3].blue;
+
+        k4r = ker[4].red;
+        k4g = ker[4].green;
+        k4b = ker[4].blue;
+
+        k5r = ker[5].red;
+        k5g = ker[5].green;
+        k5b = ker[5].blue;
+
+        k6r = ker[6].red;
+        k6g = ker[6].green;
+        k6b = ker[6].blue;
+
+        k7r = ker[7].red;
+        k7g = ker[7].green;
+        k7b = ker[7].blue;
+        for (j = 0; j < size; j++) { 
+            __builtin_prefetch(&src[n1+8],0,0);
+            s1 = src[n1].red * k0r + src[n1].green * k0g + src[n1].blue * k0b+
+            src[n1 + 1].red * k1r + src[n1 + 1].green * k1g + src[n1 + 1].blue * k1b +
+            src[n1 + 2].red * k2r + src[n1 + 2].green * k2g + src[n1 + 2].blue * k2b +
+            src[n1 + 3].red * k3r + src[n1 + 3].green * k3g + src[n1 + 3].blue * k3b +
+            src[n1 + 4].red * k4r + src[n1 + 4].green * k4g + src[n1 + 4].blue * k4b +
+            src[n1 + 5].red * k5r + src[n1 + 5].green * k5g + src[n1 + 5].blue * k5b +
+            src[n1 + 6].red * k6r + src[n1 + 6].green * k6g + src[n1 + 6].blue * k6b +
+            src[n1 + 7].red * k7r + src[n1 + 7].green * k7g + src[n1 + 7].blue * k7b;
+            dst[n1++] = s1;
+        }
+        zet = dim + n;
+        n2 = n;
+
+        k0r = ker[8].red;
+        k0g = ker[8].green; 
+        k0b = ker[8].blue;
+
+        k1r = ker[9].red;
+        k1g = ker[9].green;
+        k1b = ker[9].blue;
+
+        k2r = ker[10].red;
+        k2g = ker[10].green;
+        k2b = ker[10].blue;
+
+        k3r = ker[11].red;
+        k3g = ker[11].green;
+        k3b = ker[11].blue;
+
+        k4r = ker[12].red;
+        k4g = ker[12].green;
+        k4b = ker[12].blue;
+
+        k5r = ker[13].red;
+        k5g = ker[13].green;
+        k5b = ker[13].blue;
+
+        k6r = ker[14].red;
+        k6g = ker[14].green;
+        k6b = ker[14].blue;
+
+        k7r = ker[15].red;
+        k7g = ker[15].green;
+        k7b = ker[15].blue;
+        for(j = 0; j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s2 = src[zet].red * k0r+ src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r+ src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r+ src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r+ src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r+ src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r+ src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r+ src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r+ src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n2++] += s2;
+            zet++;
+        }
+        zet = (dim << 1) + n; 
+        n3 = n;
+        
+        k0r = ker[16].red;
+        k0g = ker[16].green; 
+        k0b = ker[16].blue;
+
+        k1r = ker[17].red;
+        k1g = ker[17].green;
+        k1b = ker[17].blue;
+
+        k2r = ker[18].red;
+        k2g = ker[18].green;
+        k2b = ker[18].blue;
+
+        k3r = ker[19].red;
+        k3g = ker[19].green;
+        k3b = ker[19].blue;
+
+        k4r = ker[20].red;
+        k4g = ker[20].green;
+        k4b = ker[20].blue;
+
+        k5r = ker[21].red;
+        k5g = ker[21].green;
+        k5b = ker[21].blue;
+
+        k6r = ker[22].red;
+        k6g = ker[22].green;
+        k6b = ker[22].blue;
+
+        k7r = ker[23].red;
+        k7g = ker[23].green;
+        k7b = ker[23].blue;
+
+        for (int j = 0; j < size; j++) {
+            __builtin_prefetch(&src[zet+8],0,0);
+            s3 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b +
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b +
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b +
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n3++] += s3;
+            zet++;
+        }
+        zet = 3 * dim + n;
+        n4 = n;
+
+        k0r = ker[24].red;
+        k0g = ker[24].green; 
+        k0b = ker[24].blue;
+
+        k1r = ker[25].red;
+        k1g = ker[25].green;
+        k1b = ker[25].blue;
+
+        k2r = ker[26].red;
+        k2g = ker[26].green;
+        k2b = ker[26].blue;
+
+        k3r = ker[27].red;
+        k3g = ker[27].green;
+        k3b = ker[27].blue;
+
+        k4r = ker[28].red;
+        k4g = ker[28].green;
+        k4b = ker[28].blue;
+
+        k5r = ker[29].red;
+        k5g = ker[29].green;
+        k5b = ker[29].blue;
+
+        k6r = ker[30].red;
+        k6g = ker[30].green;
+        k6b = ker[30].blue;
+
+        k7r = ker[31].red;
+        k7g = ker[31].green;
+        k7b = ker[31].blue;
+        for(int j = 0; j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s4 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b + 
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b + 
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b + 
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b + 
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            dst[n4++] += s4;
+            zet++;
+        }
+        zet = (dim << 2) + n;
+        n5 = n; 
+
+        k0r = ker[32].red;
+        k0g = ker[32].green; 
+        k0b = ker[32].blue;
+
+        k1r = ker[33].red;
+        k1g = ker[33].green;
+        k1b = ker[33].blue;
+
+        k2r = ker[34].red;
+        k2g = ker[34].green;
+        k2b = ker[34].blue;
+
+        k3r = ker[35].red;
+        k3g = ker[35].green;
+        k3b = ker[35].blue;
+
+        k4r = ker[36].red;
+        k4g = ker[36].green;
+        k4b = ker[36].blue;
+
+        k5r = ker[37].red;
+        k5g = ker[37].green;
+        k5b = ker[37].blue;
+
+        k6r = ker[38].red;
+        k6g = ker[38].green;
+        k6b = ker[38].blue;
+
+        k7r = ker[39].red;
+        k7g = ker[39].green;
+        k7b = ker[39].blue;
+        for(int j = 0;j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s5 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b + 
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b + 
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b + 
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b + 
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            dst[n5++] += s5;
+            zet++;
+        }
+        zet = 5 * dim + n;
+        n6 = n;
+
+        k0r = ker[40].red;
+        k0g = ker[40].green; 
+        k0b = ker[40].blue;
+
+        k1r = ker[41].red;
+        k1g = ker[41].green;
+        k1b = ker[41].blue;
+
+        k2r = ker[42].red;
+        k2g = ker[42].green;
+        k2b = ker[42].blue;
+
+        k3r = ker[43].red;
+        k3g = ker[43].green;
+        k3b = ker[43].blue;
+
+        k4r = ker[44].red;
+        k4g = ker[44].green;
+        k4b = ker[44].blue;
+
+        k5r = ker[45].red;
+        k5g = ker[45].green;
+        k5b = ker[45].blue;
+
+        k6r = ker[46].red;
+        k6g = ker[46].green;
+        k6b = ker[46].blue;
+
+        k7r = ker[47].red;
+        k7g = ker[47].green;
+        k7b = ker[47].blue;
+        for(int j = 0;j<size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s6 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n6++] += s6;
+            zet++;
+        }
+        zet = 6 * dim + n; 
+        n7 = n;
+
+        k0r = ker[48].red;
+        k0g = ker[48].green; 
+        k0b = ker[48].blue;
+
+        k1r = ker[49].red;
+        k1g = ker[49].green;
+        k1b = ker[49].blue;
+
+        k2r = ker[50].red;
+        k2g = ker[50].green;
+        k2b = ker[50].blue;
+
+        k3r = ker[51].red;
+        k3g = ker[51].green;
+        k3b = ker[51].blue;
+
+        k4r = ker[52].red;
+        k4g = ker[52].green;
+        k4b = ker[52].blue;
+
+        k5r = ker[53].red;
+        k5g = ker[53].green;
+        k5b = ker[53].blue;
+
+        k6r = ker[54].red;
+        k6g = ker[54].green;
+        k6b = ker[54].blue;
+
+        k7r = ker[55].red;
+        k7g = ker[55].green;
+        k7b = ker[55].blue;
+        for(int j=0 ; j< size;j++){
+            __builtin_prefetch(&src[zet+8] , 0, 0);
+            s7 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n7++] += s7;
+            zet++;
+        }
+        zet = 7 * dim + n;
+        n8 = n;
+
+        k0r = ker[56].red;
+        k0g = ker[56].green; 
+        k0b = ker[56].blue;
+
+        k1r = ker[57].red;
+        k1g = ker[57].green;
+        k1b = ker[57].blue;
+
+        k2r = ker[58].red;
+        k2g = ker[58].green;
+        k2b = ker[58].blue;
+
+        k3r = ker[59].red;
+        k3g = ker[59].green;
+        k3b = ker[59].blue;
+
+        k4r = ker[60].red;
+        k4g = ker[60].green;
+        k4b = ker[60].blue;
+
+        k5r = ker[61].red;
+        k5g = ker[61].green;
+        k5b = ker[61].blue;
+
+        k6r = ker[62].red;
+        k6g = ker[62].green;
+        k6b = ker[62].blue;
+
+        k7r = ker[63].red;
+        k7g = ker[63].green;
+        k7b = ker[63].blue;
+
+
+        for(int j=0;j<size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s8 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b +
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b +
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b +
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b; 
+            dst[n8++] += s8;
+            zet++;
+        }
+
+        m += dim;
+    }
+}
+
+
+
+char test_convolution_descr[] = "Convolution: test version.";
+void test_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
+    const int size = dim-7;
+    int m = 0;
+    int i,j,s1,s2,s3,s4,s5,s6,s7,s8,zet,n;
+    int n1,n2,n3,n4,n5,n6,n7,n8;
+    int k0r,k0g,k0b,k1r,k1g,k1b,k2r,k2g,k2b,k3r,k3g,k3b,k4r,k4g,k4b,k5r,k5g,k5b,k6r,k6g,k6b,k7r,k7g,k7b;
+
+    for (i = 0; i < size; i++) {
+        n = m;
+        n1 = n;
+        pixel * ker_p = ker;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;    
+
+        
+
+        for (j = 0; j < size; j++) { 
+            __builtin_prefetch(&src[n1+8],0,0);
+            s1 = src[n1].red * k0r + src[n1].green * k0g + src[n1].blue * k0b+
+            src[n1 + 1].red * k1r + src[n1 + 1].green * k1g + src[n1 + 1].blue * k1b +
+            src[n1 + 2].red * k2r + src[n1 + 2].green * k2g + src[n1 + 2].blue * k2b +
+            src[n1 + 3].red * k3r + src[n1 + 3].green * k3g + src[n1 + 3].blue * k3b +
+            src[n1 + 4].red * k4r + src[n1 + 4].green * k4g + src[n1 + 4].blue * k4b +
+            src[n1 + 5].red * k5r + src[n1 + 5].green * k5g + src[n1 + 5].blue * k5b +
+            src[n1 + 6].red * k6r + src[n1 + 6].green * k6g + src[n1 + 6].blue * k6b +
+            src[n1 + 7].red * k7r + src[n1 + 7].green * k7g + src[n1 + 7].blue * k7b;
+            dst[n1++] = s1;
+        }
+        zet = dim + n;
+        n2 = n;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+        
+        for(j = 0; j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s2 = src[zet].red * k0r+ src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r+ src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r+ src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r+ src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r+ src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r+ src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r+ src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r+ src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n2++] += s2;
+            zet++;
+        }
+        zet = (dim << 1) + n; 
+        n3 = n;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+        for (int j = 0; j < size; j++) {
+            __builtin_prefetch(&src[zet+8],0,0);
+            s3 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b +
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b +
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b +
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n3++] += s3;
+            zet++;
+        }
+        zet = 3 * dim + n;
+        n4 = n;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+        for(int j = 0; j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s4 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b + 
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b + 
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b + 
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b + 
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            dst[n4++] += s4;
+            zet++;
+        }
+        zet = (dim << 2) + n;
+        n5 = n; 
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+        for(int j = 0;j < size; j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s5 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b + 
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b + 
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b + 
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b + 
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            dst[n5++] += s5;
+            zet++;
+        }
+        zet = 5 * dim + n;
+        n6 = n;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+        for(int j = 0;j<size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s6 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n6++] += s6;
+            zet++;
+        }
+        zet = 6 * dim + n; 
+        n7 = n;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+        for(int j=0 ; j< size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s7 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            dst[n7++] += s7;
+            zet++;
+        }
+        zet = 7 * dim + n;
+        n8 = n;
+
+        k0r = ker_p->red;
+        k0g = ker_p->green; 
+        k0b = ker_p->blue;
+        ker_p++;
+
+        k1r = ker_p->red;
+        k1g = ker_p->green;
+        k1b = ker_p->blue;
+        ker_p++;
+
+        k2r = ker_p->red;
+        k2g = ker_p->green;
+        k2b = ker_p->blue;
+        ker_p++;
+
+        k3r = ker_p->red;
+        k3g = ker_p->green;
+        k3b = ker_p->blue;
+        ker_p++;
+
+        k4r = ker_p->red;
+        k4g = ker_p->green;
+        k4b = ker_p->blue;
+        ker_p++;
+
+        k5r = ker_p->red;
+        k5g = ker_p->green;
+        k5b = ker_p->blue;
+        ker_p++;
+
+        k6r = ker_p->red;
+        k6g = ker_p->green;
+        k6b = ker_p->blue;
+        ker_p++;
+
+        k7r = ker_p->red;
+        k7g = ker_p->green;
+        k7b = ker_p->blue;
+        ker_p++;
+
+
+        for(int j=0;j<size;j++){
+            __builtin_prefetch(&src[zet+8],0,0);
+            s8 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b +
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b +
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b +
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b; 
+            dst[n8++] += s8;
+            zet++;
+        }
+
+        m += dim;
+    }
+}
+
 
 void convolution_using_stack(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
@@ -454,6 +1161,9 @@ void register_conv_functions() {
     add_conv_function(&naive_conv, naive_conv_descr);
     add_conv_function(&convolution, convolution_descr);
     /* ... Register additional test functions here */
+    add_conv_function(&test_convolution, test_convolution_descr);
+    add_conv_function(&bahadir_convolution,bahadir_convolution_descr);
+    add_conv_function(&bahadir_convolutionV3,bahadir_convolution_descrV3);
 }
 
 /************************
