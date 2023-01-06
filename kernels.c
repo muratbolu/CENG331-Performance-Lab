@@ -185,56 +185,125 @@ char convolution_descr[] = "Convolution: Current working version";
 void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
 
-    unsigned i,j,k,src_index=0,index;
-    unsigned short sum_red, sum_green, sum_blue;
+    unsigned i,j,k,l,sum,red,green,blue;
 
     for(i = 0; i < dim-8+1; i++) {
         for(j = 0; j < dim-8+1; j++) {
-            sum_red = 0;
-            sum_green = 0;
-            sum_blue = 0;
-            for(k = 0; k < 64; k+=8) {
-                index = src_index+(k % 8)+(k >> 3)*dim;
-                sum_red += src[index].red   * ker[k].red;
-                sum_green += src[index].green * ker[k].green;
-                sum_blue += src[index].blue  * ker[k].blue;
+            sum ^= sum;
+            for(k = 0; k < 8; k++) {
+                red   = src[RIDX((i+k),j, dim)].red;
+                green = src[RIDX((i+k),j, dim)].green;
+                blue  = src[RIDX((i+k),j, dim)].blue;
+                red   *= ker[k<<3].red;
+                green *= ker[k<<3].green;
+                blue  *= ker[k<<3].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+1) % 8)+((k+1) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+1].red;
-                sum_green += src[index].green * ker[k+1].green;
-                sum_blue += src[index].blue  * ker[k+1].blue;
+                red   = src[RIDX((i+k), (j+1), dim)].red;
+                green = src[RIDX((i+k), (j+1), dim)].green;
+                blue  = src[RIDX((i+k), (j+1), dim)].blue;
+                red   *= ker[(k<<3)+1].red;
+                green *= ker[(k<<3)+1].green;
+                blue  *= ker[(k<<3)+1].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+2) % 8)+((k+2) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+2].red;
-                sum_green += src[index].green * ker[k+2].green;
-                sum_blue += src[index].blue  * ker[k+2].blue;
+                red   = src[RIDX((i+k), (j+2), dim)].red;
+                green = src[RIDX((i+k), (j+2), dim)].green;
+                blue  = src[RIDX((i+k), (j+2), dim)].blue;
+                red   *= ker[(k<<3)+2].red;
+                green *= ker[(k<<3)+2].green;
+                blue  *= ker[(k<<3)+2].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+3) % 8)+((k+3) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+3].red;
-                sum_green += src[index].green * ker[k+3].green;
-                sum_blue += src[index].blue  * ker[k+3].blue;
+                red   = src[RIDX((i+k), (j+3), dim)].red;
+                green = src[RIDX((i+k), (j+3), dim)].green;
+                blue  = src[RIDX((i+k), (j+3), dim)].blue;
+                red   *= ker[(k<<3)+3].red;
+                green *= ker[(k<<3)+3].green;
+                blue  *= ker[(k<<3)+3].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+4) % 8)+((k+4) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+4].red;
-                sum_green += src[index].green * ker[k+4].green;
-                sum_blue += src[index].blue  * ker[k+4].blue;
+                red   = src[RIDX((i+k), (j+4), dim)].red;
+                green = src[RIDX((i+k), (j+4), dim)].green;
+                blue  = src[RIDX((i+k), (j+4), dim)].blue;
+                red   *= ker[(k<<3)+4].red;
+                green *= ker[(k<<3)+4].green;
+                blue  *= ker[(k<<3)+4].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+5) % 8)+((k+5) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+5].red;
-                sum_green += src[index].green * ker[k+5].green;
-                sum_blue += src[index].blue  * ker[k+5].blue;
+                red   = src[RIDX((i+k), (j+5), dim)].red;
+                green = src[RIDX((i+k), (j+5), dim)].green;
+                blue  = src[RIDX((i+k), (j+5), dim)].blue;
+                red   *= ker[(k<<3)+5].red;
+                green *= ker[(k<<3)+5].green;
+                blue  *= ker[(k<<3)+5].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+6) % 8)+((k+6) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+6].red;
-                sum_green += src[index].green * ker[k+6].green;
-                sum_blue += src[index].blue  * ker[k+6].blue;
+                red   = src[RIDX((i+k), (j+6), dim)].red;
+                green = src[RIDX((i+k), (j+6), dim)].green;
+                blue  = src[RIDX((i+k), (j+6), dim)].blue;
+                red   *= ker[(k<<3)+6].red;
+                green *= ker[(k<<3)+6].green;
+                blue  *= ker[(k<<3)+6].blue;
+                sum += red + green + blue;
 
-                index = src_index+((k+7) % 8)+((k+7) >> 3)*dim;
-                sum_red += src[index].red   * ker[k+7].red;
-                sum_green += src[index].green * ker[k+7].green;
-                sum_blue += src[index].blue  * ker[k+7].blue;
+                red   = src[RIDX((i+k), (j+7), dim)].red;
+                green = src[RIDX((i+k), (j+7), dim)].green;
+                blue  = src[RIDX((i+k), (j+7), dim)].blue;
+                red   *= ker[(k<<3)+7].red;
+                green *= ker[(k<<3)+7].green;
+                blue  *= ker[(k<<3)+7].blue;
+                sum += red + green + blue;
+
             }
-            dst[src_index++] = sum_red + sum_green + sum_blue;
+            dst[i*dim+j] = sum;
+        }
+    }
+}
+
+void convolution_try_to_reduce_registers(int dim, pixel *src, pixel *ker, unsigned *dst)
+{
+
+    unsigned i,j,k,sum;
+
+    for(i = 0; i < dim-8+1; i++) {
+        for(j = 0; j < dim-8+1; j++) {
+            sum = 0;
+            for(k = 0; k < 8; k++) {
+                sum += src[(i+k)*dim+j].red   * ker[k<<3].red;
+                sum += src[(i+k)*dim+j].green * ker[k<<3].green;
+                sum += src[(i+k)*dim+j].blue  * ker[k<<3].blue;
+
+                sum += src[(i+k)*dim+j+1].red   * ker[(k<<3)+1].red;
+                sum += src[(i+k)*dim+j+1].green * ker[(k<<3)+1].green;
+                sum += src[(i+k)*dim+j+1].blue  * ker[(k<<3)+1].blue;
+
+                sum += src[(i+k)*dim+j+2].red   * ker[(k<<3)+2].red;
+                sum += src[(i+k)*dim+j+2].green * ker[(k<<3)+2].green;
+                sum += src[(i+k)*dim+j+2].blue  * ker[(k<<3)+2].blue;
+
+                sum += src[(i+k)*dim+j+3].red   * ker[(k<<3)+3].red;
+                sum += src[(i+k)*dim+j+3].green * ker[(k<<3)+3].green;
+                sum += src[(i+k)*dim+j+3].blue  * ker[(k<<3)+3].blue;
+
+                sum += src[(i+k)*dim+j+4].red   * ker[(k<<3)+4].red;
+                sum += src[(i+k)*dim+j+4].green * ker[(k<<3)+4].green;
+                sum += src[(i+k)*dim+j+4].blue  * ker[(k<<3)+4].blue;
+
+                sum += src[(i+k)*dim+j+5].red   * ker[(k<<3)+5].red;
+                sum += src[(i+k)*dim+j+5].green * ker[(k<<3)+5].green;
+                sum += src[(i+k)*dim+j+5].blue  * ker[(k<<3)+5].blue;
+
+                sum += src[(i+k)*dim+j+6].red   * ker[(k<<3)+6].red;
+                sum += src[(i+k)*dim+j+6].green * ker[(k<<3)+6].green;
+                sum += src[(i+k)*dim+j+6].blue  * ker[(k<<3)+6].blue;
+
+                sum += src[(i+k)*dim+j+7].red   * ker[(k<<3)+7].red;
+                sum += src[(i+k)*dim+j+7].green * ker[(k<<3)+7].green;
+                sum += src[(i+k)*dim+j+7].blue  * ker[(k<<3)+7].blue;
+
+            }
+            dst[i*dim+j] = sum;
         }
     }
 }
