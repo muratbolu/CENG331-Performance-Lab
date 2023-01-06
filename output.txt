@@ -8,52 +8,52 @@ Name3: BAHADIR AYDIN
 
 conv: Version = naive_conv: Naive baseline implementation:
 Dim		32	64	128	256	512	Mean
-Your CPEs	261.0	340.6	383.7	405.8	417.4
+Your CPEs	302.2	416.2	465.3	491.9	507.1
 Baseline CPEs	277.0	358.0	404.0	427.0	439.0
-Speedup		1.1	1.1	1.1	1.1	1.1	1.1
+Speedup		0.9	0.9	0.9	0.9	0.9	0.9
 
 conv: Version = Convolution: Current working version:
 Dim		32	64	128	256	512	Mean
-Your CPEs	190.3	246.8	277.8	293.5	302.5
+Your CPEs	152.7	173.8	202.9	219.5	224.4
 Baseline CPEs	277.0	358.0	404.0	427.0	439.0
-Speedup		1.5	1.5	1.5	1.5	1.5	1.5
+Speedup		1.8	2.1	2.0	1.9	2.0	2.0
 
 conv: Version = Convolution: Bahadır version:
 Dim		32	64	128	256	512	Mean
-Your CPEs	122.9	158.9	180.0	190.0	195.0
+Your CPEs	134.2	176.6	202.6	218.4	225.5
 Baseline CPEs	277.0	358.0	404.0	427.0	439.0
-Speedup		2.3	2.3	2.2	2.2	2.3	2.3
+Speedup		2.1	2.0	2.0	2.0	1.9	2.0
 
 Avpol: Version = Naive Average Pooling: Naive baseline implementation:
 Dim		32	64	128	256	512	Mean
-Your CPEs	6.9	6.7	6.5	6.5	6.5
+Your CPEs	7.5	7.2	7.2	7.1	7.2
 Baseline CPEs	6.8	6.6	6.5	6.5	6.5
-Speedup		1.0	1.0	1.0	1.0	1.0	1.0
+Speedup		0.9	0.9	0.9	0.9	0.9	0.9
 
 Avpol: Version = Average Pooling: old version:
 Dim		32	64	128	256	512	Mean
-Your CPEs	4.2	4.4	4.3	4.2	4.2
+Your CPEs	4.4	4.6	4.4	4.5	4.4
 Baseline CPEs	6.8	6.6	6.5	6.5	6.5
-Speedup		1.6	1.5	1.5	1.5	1.5	1.5
+Speedup		1.5	1.4	1.5	1.5	1.5	1.5
 
 Avpol: Version = Average Pooling: reducing sequential dependency:
 Dim		32	64	128	256	512	Mean
-Your CPEs	2.6	2.7	2.7	2.7	2.7
+Your CPEs	2.9	3.0	3.0	3.0	3.1
 Baseline CPEs	6.8	6.6	6.5	6.5	6.5
-Speedup		2.6	2.4	2.4	2.4	2.4	2.4
+Speedup		2.3	2.2	2.2	2.2	2.1	2.2
 
 Avpol: Version = Average Pooling: Current working version:
 Dim		32	64	128	256	512	Mean
-Your CPEs	2.6	2.6	2.6	2.7	2.6
+Your CPEs	2.9	2.9	2.8	2.9	3.0
 Baseline CPEs	6.8	6.6	6.5	6.5	6.5
-Speedup		2.6	2.5	2.5	2.4	2.5	2.5
+Speedup		2.3	2.3	2.3	2.2	2.2	2.3
 
 Avpol: Version = Average Pooling: test version:
 Dim		32	64	128	256	512	Mean
-Your CPEs	2.6	2.7	2.7	2.0	2.7
+Your CPEs	2.9	3.0	2.9	3.0	3.1
 Baseline CPEs	6.8	6.6	6.5	6.5	6.5
-Speedup		2.6	2.4	2.4	3.2	2.4	2.6
+Speedup		2.3	2.2	2.2	2.2	2.1	2.2
 
 Summary of Your Best Scores:
-  Average Pooling: 2.6 (Average Pooling: test version)
-  Convolution: 2.3 (Convolution: Bahadır version)
+  Average Pooling: 2.3 (Average Pooling: Current working version)
+  Convolution: 2.0 (Convolution: Bahadır version)
