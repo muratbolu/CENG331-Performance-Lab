@@ -184,80 +184,316 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
 char convolution_descr[] = "Convolution: Current working version";
 void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
+    const int size = dim-7;
+    int m = 0;
+    int i,j,s1,s2,s3,s4,s5,s6,s7,s8,zet,n;
+    int n1,n2,n3,n4,n5,n6,n7,n8;
+    for (i = 0; i < size; i++) {
+        n = m;
+        n1 = n;
+        for (j = 0; j < size; j++) { 
+            s1 = src[n1].red   * ker[0].red
+               + src[n1].green * ker[0].green
+               + src[n1].blue  * ker[0].blue
 
-    unsigned i,j,k,l,sum,red,green,blue;
+               + src[n1 + 1].red   * ker[1].red
+               + src[n1 + 1].green * ker[1].green
+               + src[n1 + 1].blue  * ker[1].blue
 
-    for(i = 0; i < dim-8+1; i++) {
-        for(j = 0; j < dim-8+1; j++) {
-            sum ^= sum;
-            for(k = 0; k < 8; k++) {
-                red   = src[RIDX((i+k),j, dim)].red;
-                green = src[RIDX((i+k),j, dim)].green;
-                blue  = src[RIDX((i+k),j, dim)].blue;
-                red   *= ker[k<<3].red;
-                green *= ker[k<<3].green;
-                blue  *= ker[k<<3].blue;
-                sum += red + green + blue;
+               + src[n1 + 2].red   * ker[2].red
+               + src[n1 + 2].green * ker[2].green
+               + src[n1 + 2].blue  * ker[2].blue
 
-                red   = src[RIDX((i+k), (j+1), dim)].red;
-                green = src[RIDX((i+k), (j+1), dim)].green;
-                blue  = src[RIDX((i+k), (j+1), dim)].blue;
-                red   *= ker[(k<<3)+1].red;
-                green *= ker[(k<<3)+1].green;
-                blue  *= ker[(k<<3)+1].blue;
-                sum += red + green + blue;
+               + src[n1 + 3].red   * ker[3].red
+               + src[n1 + 3].green * ker[3].green
+               + src[n1 + 3].blue  * ker[3].blue
 
-                red   = src[RIDX((i+k), (j+2), dim)].red;
-                green = src[RIDX((i+k), (j+2), dim)].green;
-                blue  = src[RIDX((i+k), (j+2), dim)].blue;
-                red   *= ker[(k<<3)+2].red;
-                green *= ker[(k<<3)+2].green;
-                blue  *= ker[(k<<3)+2].blue;
-                sum += red + green + blue;
+               + src[n1 + 4].red   * ker[4].red
+               + src[n1 + 4].green * ker[4].green
+               + src[n1 + 4].blue  * ker[4].blue
 
-                red   = src[RIDX((i+k), (j+3), dim)].red;
-                green = src[RIDX((i+k), (j+3), dim)].green;
-                blue  = src[RIDX((i+k), (j+3), dim)].blue;
-                red   *= ker[(k<<3)+3].red;
-                green *= ker[(k<<3)+3].green;
-                blue  *= ker[(k<<3)+3].blue;
-                sum += red + green + blue;
+               + src[n1 + 5].red   * ker[5].red
+               + src[n1 + 5].green * ker[5].green
+               + src[n1 + 5].blue  * ker[5].blue
 
-                red   = src[RIDX((i+k), (j+4), dim)].red;
-                green = src[RIDX((i+k), (j+4), dim)].green;
-                blue  = src[RIDX((i+k), (j+4), dim)].blue;
-                red   *= ker[(k<<3)+4].red;
-                green *= ker[(k<<3)+4].green;
-                blue  *= ker[(k<<3)+4].blue;
-                sum += red + green + blue;
+               + src[n1 + 6].red   * ker[6].red
+               + src[n1 + 6].green * ker[6].green
+               + src[n1 + 6].blue  * ker[6].blue
 
-                red   = src[RIDX((i+k), (j+5), dim)].red;
-                green = src[RIDX((i+k), (j+5), dim)].green;
-                blue  = src[RIDX((i+k), (j+5), dim)].blue;
-                red   *= ker[(k<<3)+5].red;
-                green *= ker[(k<<3)+5].green;
-                blue  *= ker[(k<<3)+5].blue;
-                sum += red + green + blue;
+               + src[n1 + 7].red   * ker[7].red
+               + src[n1 + 7].green * ker[7].green
+               + src[n1 + 7].blue  * ker[7].blue;
 
-                red   = src[RIDX((i+k), (j+6), dim)].red;
-                green = src[RIDX((i+k), (j+6), dim)].green;
-                blue  = src[RIDX((i+k), (j+6), dim)].blue;
-                red   *= ker[(k<<3)+6].red;
-                green *= ker[(k<<3)+6].green;
-                blue  *= ker[(k<<3)+6].blue;
-                sum += red + green + blue;
-
-                red   = src[RIDX((i+k), (j+7), dim)].red;
-                green = src[RIDX((i+k), (j+7), dim)].green;
-                blue  = src[RIDX((i+k), (j+7), dim)].blue;
-                red   *= ker[(k<<3)+7].red;
-                green *= ker[(k<<3)+7].green;
-                blue  *= ker[(k<<3)+7].blue;
-                sum += red + green + blue;
-
-            }
-            dst[i*dim+j] = sum;
+            dst[n1++] = s1;
         }
+        zet = dim + n;
+        n2 = n;
+        for(j = 0; j < size; j++){
+            s2 = src[zet].red   * ker[8].red
+               + src[zet].green * ker[8].green
+               + src[zet].blue  * ker[8].blue
+
+               + src[zet + 1].red   * ker[9].red
+               + src[zet + 1].green * ker[9].green
+               + src[zet + 1].blue  * ker[9].blue
+
+               + src[zet + 2].red   * ker[10].red
+               + src[zet + 2].green * ker[10].green
+               + src[zet + 2].blue  * ker[10].blue
+
+               + src[zet + 3].red   * ker[11].red
+               + src[zet + 3].green * ker[11].green
+               + src[zet + 3].blue  * ker[11].blue
+
+               + src[zet + 4].red   * ker[12].red
+               + src[zet + 4].green * ker[12].green
+               + src[zet + 4].blue  * ker[12].blue
+
+               + src[zet + 5].red   * ker[13].red
+               + src[zet + 5].green * ker[13].green
+               + src[zet + 5].blue  * ker[13].blue
+
+               + src[zet + 6].red   * ker[14].red
+               + src[zet + 6].green * ker[14].green
+               + src[zet + 6].blue  * ker[14].blue
+
+               + src[zet + 7].red   * ker[15].red
+               + src[zet + 7].green * ker[15].green
+               + src[zet + 7].blue  * ker[15].blue;
+
+            dst[n2++] += s2;
+            zet++;
+        }
+        zet = (dim << 1) + n; 
+        n3 = n;
+        for (int j = 0; j < size; j++) {
+            s3 = src[zet].red   * ker[16].red
+               + src[zet].green * ker[16].green
+               + src[zet].blue  * ker[16].blue
+
+               + src[zet + 1].red   * ker[17].red
+               + src[zet + 1].green * ker[17].green
+               + src[zet + 1].blue  * ker[17].blue
+
+               + src[zet + 2].red   * ker[18].red
+               + src[zet + 2].green * ker[18].green
+               + src[zet + 2].blue  * ker[18].blue
+
+               + src[zet + 3].red   * ker[19].red
+               + src[zet + 3].green * ker[19].green
+               + src[zet + 3].blue  * ker[19].blue
+
+               + src[zet + 4].red   * ker[20].red
+               + src[zet + 4].green * ker[20].green
+               + src[zet + 4].blue  * ker[20].blue
+
+               + src[zet + 5].red   * ker[21].red 
+               + src[zet + 5].green * ker[21].green
+               + src[zet + 5].blue  * ker[21].blue
+
+               + src[zet + 6].red   * ker[22].red
+               + src[zet + 6].green * ker[22].green
+               + src[zet + 6].blue  * ker[22].blue
+
+               + src[zet + 7].red   * ker[23].red
+               + src[zet + 7].green * ker[23].green
+               + src[zet + 7].blue  * ker[23].blue;
+
+            dst[n3++] += s3;
+            zet++;
+        }
+        zet = 3 * dim + n;
+        n4 = n;
+        for(int j = 0; j < size; j++){
+            s4 = src[zet].red   * ker[24].red
+               + src[zet].green * ker[24].green
+               + src[zet].blue  * ker[24].blue
+
+               + src[zet + 1].red   * ker[25].red
+               + src[zet + 1].green * ker[25].green
+               + src[zet + 1].blue  * ker[25].blue
+
+               + src[zet + 2].red   * ker[26].red
+               + src[zet + 2].green * ker[26].green
+               + src[zet + 2].blue  * ker[26].blue
+
+               + src[zet + 3].red   * ker[27].red
+               + src[zet + 3].green * ker[27].green
+               + src[zet + 3].blue  * ker[27].blue
+
+               + src[zet + 4].red   * ker[28].red
+               + src[zet + 4].green * ker[28].green
+               + src[zet + 4].blue  * ker[28].blue
+
+               + src[zet + 5].red   * ker[29].red
+               + src[zet + 5].green * ker[29].green
+               + src[zet + 5].blue  * ker[29].blue
+
+               + src[zet + 6].red   * ker[30].red
+               + src[zet + 6].green * ker[30].green
+               + src[zet + 6].blue  * ker[30].blue
+
+               + src[zet + 7].red   * ker[31].red
+               + src[zet + 7].green * ker[31].green
+               + src[zet + 7].blue  * ker[31].blue;
+
+            dst[n4++] += s4;
+            zet++;
+        }
+        zet = (dim << 2) + n;
+        n5 = n; 
+        for(int j = 0;j < size; j++){
+            s5 = src[zet].red   * ker[32].red
+               + src[zet].green * ker[32].green
+               + src[zet].blue  * ker[32].blue
+
+               + src[zet + 1].red   * ker[33].red
+               + src[zet + 1].green * ker[33].green
+               + src[zet + 1].blue  * ker[33].blue
+
+               + src[zet + 2].red   * ker[34].red
+               + src[zet + 2].green * ker[34].green
+               + src[zet + 2].blue  * ker[34].blue
+
+               + src[zet + 3].red   * ker[35].red
+               + src[zet + 3].green * ker[35].green
+               + src[zet + 3].blue  * ker[35].blue
+
+               + src[zet + 4].red   * ker[36].red
+               + src[zet + 4].green * ker[36].green
+               + src[zet + 4].blue  * ker[36].blue
+
+               + src[zet + 5].red   * ker[37].red
+               + src[zet + 5].green * ker[37].green
+               + src[zet + 5].blue  * ker[37].blue
+
+               + src[zet + 6].red   * ker[38].red
+               + src[zet + 6].green * ker[38].green
+               + src[zet + 6].blue  * ker[38].blue
+
+               + src[zet + 7].red   * ker[39].red
+               + src[zet + 7].green * ker[39].green
+               + src[zet + 7].blue  * ker[39].blue;
+
+            dst[n5++] += s5;
+            zet++;
+        }
+        zet = 5 * dim + n;
+        n6 = n;
+        for(int j = 0;j<size;j++){
+            s6 = src[zet].red   * ker[40].red
+               + src[zet].green * ker[40].green
+               + src[zet].blue  * ker[40].blue
+
+               + src[zet + 1].red   * ker[41].red 
+               + src[zet + 1].green * ker[41].green 
+               + src[zet + 1].blue  * ker[41].blue
+
+               + src[zet + 2].red   * ker[42].red 
+               + src[zet + 2].green * ker[42].green 
+               + src[zet + 2].blue  * ker[42].blue 
+
+               + src[zet + 3].red   * ker[43].red 
+               + src[zet + 3].green * ker[43].green 
+               + src[zet + 3].blue  * ker[43].blue 
+
+               + src[zet + 4].red   * ker[44].red 
+               + src[zet + 4].green * ker[44].green 
+               + src[zet + 4].blue  * ker[44].blue 
+
+               + src[zet + 5].red   * ker[45].red 
+               + src[zet + 5].green * ker[45].green 
+               + src[zet + 5].blue  * ker[45].blue 
+
+               + src[zet + 6].red   * ker[46].red 
+               + src[zet + 6].green * ker[46].green 
+               + src[zet + 6].blue  * ker[46].blue 
+
+               + src[zet + 7].red   * ker[47].red 
+               + src[zet + 7].green * ker[47].green 
+               + src[zet + 7].blue  * ker[47].blue;
+
+            dst[n6++] += s6;
+            zet++;
+        }
+        zet = 6 * dim + n; 
+        n7 = n;
+        for(int j=0 ; j< size;j++){
+            s7 = src[zet].red   * ker[48].red 
+               + src[zet].green * ker[48].green 
+               + src[zet].blue  * ker[48].blue 
+
+               + src[zet + 1].red   * ker[49].red 
+               + src[zet + 1].green * ker[49].green 
+               + src[zet + 1].blue  * ker[49].blue 
+
+               + src[zet + 2].red   * ker[50].red 
+               + src[zet + 2].green * ker[50].green 
+               + src[zet + 2].blue  * ker[50].blue 
+
+               + src[zet + 3].red   * ker[51].red 
+               + src[zet + 3].green * ker[51].green 
+               + src[zet + 3].blue  * ker[51].blue 
+
+               + src[zet + 4].red   * ker[52].red 
+               + src[zet + 4].green * ker[52].green 
+               + src[zet + 4].blue  * ker[52].blue 
+
+               + src[zet + 5].red   * ker[53].red 
+               + src[zet + 5].green * ker[53].green 
+               + src[zet + 5].blue  * ker[53].blue 
+
+               + src[zet + 6].red   * ker[54].red 
+               + src[zet + 6].green * ker[54].green 
+               + src[zet + 6].blue  * ker[54].blue 
+
+               + src[zet + 7].red   * ker[55].red 
+               + src[zet + 7].green * ker[55].green 
+               + src[zet + 7].blue  * ker[55].blue;
+
+            dst[n7++] += s7;
+            zet++;
+        }
+        zet = 7 * dim + n;
+        n8 = n;
+        for(int j=0;j<size;j++){
+            s8 = src[zet].red   * ker[56].red 
+               + src[zet].green * ker[56].green 
+               + src[zet].blue  * ker[56].blue 
+
+               + src[zet + 1].red   * ker[57].red 
+               + src[zet + 1].green * ker[57].green 
+               + src[zet + 1].blue  * ker[57].blue 
+
+               + src[zet + 2].red   * ker[58].red 
+               + src[zet + 2].green * ker[58].green 
+               + src[zet + 2].blue  * ker[58].blue 
+
+               + src[zet + 3].red   * ker[59].red 
+               + src[zet + 3].green * ker[59].green 
+               + src[zet + 3].blue  * ker[59].blue 
+
+               + src[zet + 4].red   * ker[60].red 
+               + src[zet + 4].green * ker[60].green 
+               + src[zet + 4].blue  * ker[60].blue 
+
+               + src[zet + 5].red   * ker[61].red 
+               + src[zet + 5].green * ker[61].green 
+               + src[zet + 5].blue  * ker[61].blue 
+
+               + src[zet + 6].red   * ker[62].red 
+               + src[zet + 6].green * ker[62].green 
+               + src[zet + 6].blue  * ker[62].blue 
+
+               + src[zet + 7].red   * ker[63].red 
+               + src[zet + 7].green * ker[63].green 
+               + src[zet + 7].blue  * ker[63].blue;
+
+            dst[n8++] += s8;
+            zet++;
+        }
+
+        m += dim;
     }
 }
 
