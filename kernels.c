@@ -90,7 +90,7 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         }
         zet = (dim << 1) + n; 
         n3 = n;
-        for (int j = 0; j < size; j++) {
+        for (j = 0; j < size; j++) {
             s3 = src[zet].red * ker[16].red + src[zet].green * ker[16].green + src[zet].blue * ker[16].blue +
             src[zet + 1].red * ker[17].red + src[zet + 1].green * ker[17].green + src[zet + 1].blue * ker[17].blue +
             src[zet + 2].red * ker[18].red + src[zet + 2].green * ker[18].green + src[zet + 2].blue * ker[18].blue +
@@ -102,9 +102,9 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
             dst[n3++] += s3;
             zet++;
         }
-        zet = 3 * dim + n;
+        zet = (dim << 1) + dim + n;
         n4 = n;
-        for(int j = 0; j < size; j++){
+        for(j = 0; j < size; j++){
             s4 = src[zet].red * ker[24].red+ src[zet].green * ker[24].green+ src[zet].blue * ker[24].blue+
             src[zet + 1].red * ker[25].red+ src[zet + 1].green * ker[25].green+ src[zet + 1].blue * ker[25].blue+
             src[zet + 2].red * ker[26].red+ src[zet + 2].green * ker[26].green+ src[zet + 2].blue * ker[26].blue+
@@ -118,7 +118,7 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         }
         zet = (dim << 2) + n;
         n5 = n; 
-        for(int j = 0;j < size; j++){
+        for(j = 0;j < size; j++){
             s5 = src[zet].red * ker[32].red+ src[zet].green * ker[32].green+ src[zet].blue * ker[32].blue+
             src[zet + 1].red * ker[33].red+ src[zet + 1].green * ker[33].green+ src[zet + 1].blue * ker[33].blue+
             src[zet + 2].red * ker[34].red+ src[zet + 2].green * ker[34].green+ src[zet + 2].blue * ker[34].blue+
@@ -130,9 +130,9 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
             dst[n5++] += s5;
             zet++;
         }
-        zet = 5 * dim + n;
+        zet = (dim << 2) + dim + n;
         n6 = n;
-        for(int j = 0;j<size;j++){
+        for(j = 0;j<size;j++){
             s6 = src[zet].red * ker[40].red + src[zet].green * ker[40].green + src[zet].blue * ker[40].blue +
             src[zet + 1].red * ker[41].red + src[zet + 1].green * ker[41].green + src[zet + 1].blue * ker[41].blue +
             src[zet + 2].red * ker[42].red + src[zet + 2].green * ker[42].green + src[zet + 2].blue * ker[42].blue +
@@ -146,7 +146,7 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         }
         zet = 6 * dim + n; 
         n7 = n;
-        for(int j=0 ; j< size;j++){
+        for(j=0 ; j< size;j++){
             s7 = src[zet].red * ker[48].red + src[zet].green * ker[48].green + src[zet].blue * ker[48].blue +
             src[zet + 1].red * ker[49].red + src[zet + 1].green * ker[49].green + src[zet + 1].blue * ker[49].blue +
             src[zet + 2].red * ker[50].red + src[zet + 2].green * ker[50].green + src[zet + 2].blue * ker[50].blue +
@@ -158,9 +158,9 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
             dst[n7++] += s7;
             zet++;
         }
-        zet = 7 * dim + n;
+        zet = (dim << 3) - dim + n;
         n8 = n;
-        for(int j=0;j<size;j++){
+        for(j=0;j<size;j++){
             s8 = src[zet].red * ker[56].red + src[zet].green * ker[56].green + src[zet].blue * ker[56].blue +
             src[zet + 1].red * ker[57].red + src[zet + 1].green * ker[57].green + src[zet + 1].blue * ker[57].blue +
             src[zet + 2].red * ker[58].red + src[zet + 2].green * ker[58].green + src[zet + 2].blue * ker[58].blue +
@@ -253,7 +253,7 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
             dst[n3++] += s3;
             zet++;
         }
-        zet = 3 * dim + n;
+        zet = (dim << 1) + dim + n;
         n4 = n;
 
         k0r = ker[24].red; k0g = ker[24].green; k0b = ker[24].blue;
@@ -287,7 +287,7 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         k5r = ker[37].red;k5g = ker[37].green;k5b = ker[37].blue;
         k6r = ker[38].red;k6g = ker[38].green;k6b = ker[38].blue;
         k7r = ker[39].red;k7g = ker[39].green;k7b = ker[39].blue;
-        for(int j = 0;j < size; j++){
+        for(j = 0;j < size; j++){
             s5 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
             src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
@@ -299,7 +299,7 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
             dst[n5++] += s5;
             zet++;
         }
-        zet = 5 * dim + n;
+        zet = (dim << 2) + dim + n;
         n6 = n;
 
         k0r = ker[40].red; k0g = ker[40].green;  k0b = ker[40].blue;
@@ -310,7 +310,7 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         k5r = ker[45].red; k5g = ker[45].green; k5b = ker[45].blue;
         k6r = ker[46].red; k6g = ker[46].green; k6b = ker[46].blue;
         k7r = ker[47].red; k7g = ker[47].green; k7b = ker[47].blue;
-        for(int j = 0;j<size;j++){
+        for(j = 0;j<size;j++){
             s6 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
             src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
@@ -333,7 +333,7 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         k5r = ker[53].red; k5g = ker[53].green; k5b = ker[53].blue;
         k6r = ker[54].red; k6g = ker[54].green; k6b = ker[54].blue;
         k7r = ker[55].red; k7g = ker[55].green; k7b = ker[55].blue;
-        for(int j=0 ; j< size;j++){
+        for(j=0 ; j< size;j++){
             s7 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
             src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
@@ -356,7 +356,7 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
         k5r = ker[61].red; k5g = ker[61].green; k5b = ker[61].blue;
         k6r = ker[62].red; k6g = ker[62].green; k6b = ker[62].blue;
         k7r = ker[63].red; k7g = ker[63].green; k7b = ker[63].blue;
-        for(int j=0;j<size;j++){
+        for(j=0;j<size;j++){
             s8 = src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
             src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
             src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
@@ -366,6 +366,202 @@ void bahadir_convolutionV3(int dim, pixel *src, pixel *ker, unsigned *dst){
             src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
             src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b; 
             dst[n8++] += s8;
+            zet++;
+        }
+
+        m += dim;
+    }
+}
+
+char bahadir_convolution_descrV4[] = "Bahadır Version: Minor changes to v3"; 
+void bahadir_convolutionV4(int dim, pixel *src, pixel *ker, unsigned *dst){
+    const int size = dim-7;
+    int m = 0;
+    int i,j,zet,n;
+    int n1,n2,n3,n4,n5,n6,n7,n8;
+    int k0r,k0g,k0b,k1r,k1g,k1b,k2r,k2g,k2b,k3r,k3g,k3b,k4r,k4g,k4b,k5r,k5g,k5b,k6r,k6g,k6b,k7r,k7g,k7b;
+    for (i = 0; i < size; i++) {
+        n = m;
+        n1 = n;
+
+        k0r = ker[0].red; k0g = ker[0].green;  k0b = ker[0].blue;
+        k1r = ker[1].red; k1g = ker[1].green; k1b = ker[1].blue;
+        k2r = ker[2].red; k2g = ker[2].green; k2b = ker[2].blue;
+        k3r = ker[3].red; k3g = ker[3].green; k3b = ker[3].blue;
+        k4r = ker[4].red; k4g = ker[4].green; k4b = ker[4].blue;
+        k5r = ker[5].red; k5g = ker[5].green; k5b = ker[5].blue;
+        k6r = ker[6].red; k6g = ker[6].green; k6b = ker[6].blue;
+        k7r = ker[7].red; k7g = ker[7].green; k7b = ker[7].blue;
+        for (j = 0; j < size; j++) { 
+            dst[n1] += src[n1].red * k0r + src[n1].green * k0g + src[n1].blue * k0b+
+            src[n1 + 1].red * k1r + src[n1 + 1].green * k1g + src[n1 + 1].blue * k1b +
+            src[n1 + 2].red * k2r + src[n1 + 2].green * k2g + src[n1 + 2].blue * k2b +
+            src[n1 + 3].red * k3r + src[n1 + 3].green * k3g + src[n1 + 3].blue * k3b +
+            src[n1 + 4].red * k4r + src[n1 + 4].green * k4g + src[n1 + 4].blue * k4b +
+            src[n1 + 5].red * k5r + src[n1 + 5].green * k5g + src[n1 + 5].blue * k5b +
+            src[n1 + 6].red * k6r + src[n1 + 6].green * k6g + src[n1 + 6].blue * k6b +
+            src[n1 + 7].red * k7r + src[n1 + 7].green * k7g + src[n1 + 7].blue * k7b;
+            n1++;
+        }
+        zet = dim + n;
+        n2 = n;
+        
+        k0r = ker[8].red; k0g = ker[8].green; k0b = ker[8].blue;
+        k1r = ker[9].red;k1g = ker[9].green;k1b = ker[9].blue;
+        k2r = ker[10].red;k2g = ker[10].green;k2b = ker[10].blue;
+        k3r = ker[11].red;k3g = ker[11].green;k3b = ker[11].blue;
+        k4r = ker[12].red;k4g = ker[12].green;k4b = ker[12].blue;
+        k5r = ker[13].red;k5g = ker[13].green;k5b = ker[13].blue;
+        k6r = ker[14].red;k6g = ker[14].green;k6b = ker[14].blue;
+        k7r = ker[15].red;k7g = ker[15].green;k7b = ker[15].blue;
+        for(j = 0; j < size; j++){
+            dst[n2] += src[zet].red * k0r+ src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r+ src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r+ src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r+ src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r+ src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r+ src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r+ src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r+ src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            n2++;
+            zet++;
+        }
+        zet = (dim << 1) + n; 
+        n3 = n;
+
+        k0r = ker[16].red; k0g = ker[16].green;  k0b = ker[16].blue;
+        k1r = ker[17].red; k1g = ker[17].green; k1b = ker[17].blue;
+        k2r = ker[18].red; k2g = ker[18].green; k2b = ker[18].blue;
+        k3r = ker[19].red; k3g = ker[19].green; k3b = ker[19].blue;
+        k4r = ker[20].red; k4g = ker[20].green; k4b = ker[20].blue;
+        k5r = ker[21].red; k5g = ker[21].green; k5b = ker[21].blue;
+        k6r = ker[22].red; k6g = ker[22].green; k6b = ker[22].blue;
+        k7r = ker[23].red; k7g = ker[23].green; k7b = ker[23].blue;
+        for (j = 0; j < size; j++) {
+            dst[n3] += src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b +
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b +
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b +
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            n3++;
+            zet++;
+        }
+        zet = (dim << 1) + dim + n;
+        n4 = n;
+
+        k0r = ker[24].red; k0g = ker[24].green; k0b = ker[24].blue;
+        k1r = ker[25].red; k1g = ker[25].green; k1b = ker[25].blue;
+        k2r = ker[26].red; k2g = ker[26].green; k2b = ker[26].blue;
+        k3r = ker[27].red; k3g = ker[27].green; k3b = ker[27].blue;
+        k4r = ker[28].red; k4g = ker[28].green; k4b = ker[28].blue;
+        k5r = ker[29].red; k5g = ker[29].green; k5b = ker[29].blue;
+        k6r = ker[30].red; k6g = ker[30].green; k6b = ker[30].blue;
+        k7r = ker[31].red; k7g = ker[31].green; k7b = ker[31].blue;
+        for(int j = 0; j < size; j++){
+            dst[n4] += src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b + 
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b + 
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b + 
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b + 
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            n4++;
+            zet++;
+        }
+        zet = (dim << 2) + n;
+        n5 = n; 
+
+        k0r = ker[32].red;k0g = ker[32].green; k0b = ker[32].blue;
+        k1r = ker[33].red;k1g = ker[33].green;k1b = ker[33].blue;
+        k2r = ker[34].red;k2g = ker[34].green;k2b = ker[34].blue;
+        k3r = ker[35].red;k3g = ker[35].green;k3b = ker[35].blue;
+        k4r = ker[36].red;k4g = ker[36].green;k4b = ker[36].blue;
+        k5r = ker[37].red;k5g = ker[37].green;k5b = ker[37].blue;
+        k6r = ker[38].red;k6g = ker[38].green;k6b = ker[38].blue;
+        k7r = ker[39].red;k7g = ker[39].green;k7b = ker[39].blue;
+        for(j = 0;j < size; j++){
+            dst[n5] += src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b + 
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b + 
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b + 
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b + 
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b + 
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b + 
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b + 
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            n5++;
+            zet++;
+        }
+        zet = (dim << 2) + dim + n;
+        n6 = n;
+
+        k0r = ker[40].red; k0g = ker[40].green;  k0b = ker[40].blue;
+        k1r = ker[41].red; k1g = ker[41].green; k1b = ker[41].blue;
+        k2r = ker[42].red; k2g = ker[42].green; k2b = ker[42].blue;
+        k3r = ker[43].red; k3g = ker[43].green; k3b = ker[43].blue;
+        k4r = ker[44].red; k4g = ker[44].green; k4b = ker[44].blue;
+        k5r = ker[45].red; k5g = ker[45].green; k5b = ker[45].blue;
+        k6r = ker[46].red; k6g = ker[46].green; k6b = ker[46].blue;
+        k7r = ker[47].red; k7g = ker[47].green; k7b = ker[47].blue;
+        for(j = 0;j<size;j++){
+            dst[n6] += src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b;
+            n6++;
+            zet++;
+        }
+        zet = 6 * dim + n; 
+        n7 = n;
+
+        k0r = ker[48].red; k0g = ker[48].green;  k0b = ker[48].blue;
+        k1r = ker[49].red; k1g = ker[49].green; k1b = ker[49].blue;
+        k2r = ker[50].red; k2g = ker[50].green; k2b = ker[50].blue;
+        k3r = ker[51].red; k3g = ker[51].green; k3b = ker[51].blue;
+        k4r = ker[52].red; k4g = ker[52].green; k4b = ker[52].blue;
+        k5r = ker[53].red; k5g = ker[53].green; k5b = ker[53].blue;
+        k6r = ker[54].red; k6g = ker[54].green; k6b = ker[54].blue;
+        k7r = ker[55].red; k7g = ker[55].green; k7b = ker[55].blue;
+        for(j=0 ; j< size;j++){
+            dst[n7] += src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b+
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b+
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b+
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b+
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b+
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b+
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b+
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue *k7b;
+            n7++;
+            zet++;
+        }
+        zet = (dim << 3) - dim + n;
+        n8 = n;
+
+        k0r = ker[56].red; k0g = ker[56].green; k0b = ker[56].blue;
+        k1r = ker[57].red; k1g = ker[57].green; k1b = ker[57].blue;
+        k2r = ker[58].red; k2g = ker[58].green; k2b = ker[58].blue;
+        k3r = ker[59].red; k3g = ker[59].green; k3b = ker[59].blue;
+        k4r = ker[60].red; k4g = ker[60].green; k4b = ker[60].blue;
+        k5r = ker[61].red; k5g = ker[61].green; k5b = ker[61].blue;
+        k6r = ker[62].red; k6g = ker[62].green; k6b = ker[62].blue;
+        k7r = ker[63].red; k7g = ker[63].green; k7b = ker[63].blue;
+        for(j=0;j<size;j++){
+            dst[n8] += src[zet].red * k0r + src[zet].green * k0g + src[zet].blue * k0b +
+            src[zet + 1].red * k1r + src[zet + 1].green * k1g + src[zet + 1].blue * k1b +
+            src[zet + 2].red * k2r + src[zet + 2].green * k2g + src[zet + 2].blue * k2b +
+            src[zet + 3].red * k3r + src[zet + 3].green * k3g + src[zet + 3].blue * k3b +
+            src[zet + 4].red * k4r + src[zet + 4].green * k4g + src[zet + 4].blue * k4b +
+            src[zet + 5].red * k5r + src[zet + 5].green * k5g + src[zet + 5].blue * k5b +
+            src[zet + 6].red * k6r + src[zet + 6].green * k6g + src[zet + 6].blue * k6b +
+            src[zet + 7].red * k7r + src[zet + 7].green * k7g + src[zet + 7].blue * k7b; 
+            n8++;
             zet++;
         }
 
@@ -400,368 +596,6 @@ void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
     }
 }
 
-void convolution_completely_unrolled_doesnt_work(int dim, pixel *src, pixel *ker, unsigned *dst)
-{
-
-    unsigned i,sum=0;
-
-    for(i = 0; i < dim-7; i++) {
-
-        sum += src[i].red   * ker[0].red;
-        sum += src[i].green * ker[0].green;
-        sum += src[i].blue  * ker[0].blue;
-
-        sum += src[i+1].red   * ker[1].red;
-        sum += src[i+1].green * ker[1].green;
-        sum += src[i+1].blue  * ker[1].blue;
-
-        sum += src[i+2].red   * ker[2].red;
-        sum += src[i+2].green * ker[2].green;
-        sum += src[i+2].blue  * ker[2].blue;
-
-        sum += src[i+3].red   * ker[3].red;
-        sum += src[i+3].green * ker[3].green;
-        sum += src[i+3].blue  * ker[3].blue;
-
-        sum += src[i+4].red   * ker[4].red;
-        sum += src[i+4].green * ker[4].green;
-        sum += src[i+4].blue  * ker[4].blue;
-
-        sum += src[i+5].red   * ker[5].red;
-        sum += src[i+5].green * ker[5].green;
-        sum += src[i+5].blue  * ker[5].blue;
-
-        sum += src[i+6].red   * ker[6].red;
-        sum += src[i+6].green * ker[6].green;
-        sum += src[i+6].blue  * ker[6].blue;
-
-        sum += src[i+7].red   * ker[7].red;
-        sum += src[i+7].green * ker[7].green;
-        sum += src[i+7].blue  * ker[7].blue;
-
-        dst[i] = sum;
-        sum = 0;
-
-        sum += src[i+dim].red   * ker[8].red;
-        sum += src[i+dim].green * ker[8].green;
-        sum += src[i+dim].blue  * ker[8].blue;
-
-        sum += src[i+dim+1].red   * ker[9].red;
-        sum += src[i+dim+1].green * ker[9].green;
-        sum += src[i+dim+1].blue  * ker[9].blue;
-
-        sum += src[i+dim+2].red   * ker[10].red;
-        sum += src[i+dim+2].green * ker[10].green;
-        sum += src[i+dim+2].blue  * ker[10].blue;
-
-        sum += src[i+dim+3].red   * ker[11].red;
-        sum += src[i+dim+3].green * ker[11].green;
-        sum += src[i+dim+3].blue  * ker[11].blue;
-
-        sum += src[i+dim+4].red   * ker[12].red;
-        sum += src[i+dim+4].green * ker[12].green;
-        sum += src[i+dim+4].blue  * ker[12].blue;
-
-        sum += src[i+dim+5].red   * ker[13].red;
-        sum += src[i+dim+5].green * ker[13].green;
-        sum += src[i+dim+5].blue  * ker[13].blue;
-
-        sum += src[i+dim+6].red   * ker[14].red;
-        sum += src[i+dim+6].green * ker[14].green;
-        sum += src[i+dim+6].blue  * ker[14].blue;
-
-        sum += src[i+dim+7].red   * ker[15].red;
-        sum += src[i+dim+7].green * ker[15].green;
-        sum += src[i+dim+7].blue  * ker[15].blue;
-
-        dst[i+dim] = sum;
-        sum = 0;
-
-        sum += src[i+2*dim].red   * ker[16].red;
-        sum += src[i+2*dim].green * ker[16].green;
-        sum += src[i+2*dim].blue  * ker[16].blue;
-
-        sum += src[i+2*dim+1].red   * ker[17].red;
-        sum += src[i+2*dim+1].green * ker[17].green;
-        sum += src[i+2*dim+1].blue  * ker[17].blue;
-
-        sum += src[i+2*dim+2].red   * ker[18].red;
-        sum += src[i+2*dim+2].green * ker[18].green;
-        sum += src[i+2*dim+2].blue  * ker[18].blue;
-
-        sum += src[i+2*dim+3].red   * ker[19].red;
-        sum += src[i+2*dim+3].green * ker[19].green;
-        sum += src[i+2*dim+3].blue  * ker[19].blue;
-
-        sum += src[i+2*dim+4].red   * ker[20].red;
-        sum += src[i+2*dim+4].green * ker[20].green;
-        sum += src[i+2*dim+4].blue  * ker[20].blue;
-
-        sum += src[i+2*dim+5].red   * ker[21].red;
-        sum += src[i+2*dim+5].green * ker[21].green;
-        sum += src[i+2*dim+5].blue  * ker[21].blue;
-
-        sum += src[i+2*dim+6].red   * ker[22].red;
-        sum += src[i+2*dim+6].green * ker[22].green;
-        sum += src[i+2*dim+6].blue  * ker[22].blue;
-
-        sum += src[i+2*dim+7].red   * ker[23].red;
-        sum += src[i+2*dim+7].green * ker[23].green;
-        sum += src[i+2*dim+7].blue  * ker[23].blue;
-
-        dst[i+2*dim] = sum;
-        sum = 0;
-
-        sum += src[i+3*dim].red   * ker[24].red;
-        sum += src[i+3*dim].green * ker[24].green;
-        sum += src[i+3*dim].blue  * ker[24].blue;
-
-        sum += src[i+3*dim+1].red   * ker[25].red;
-        sum += src[i+3*dim+1].green * ker[25].green;
-        sum += src[i+3*dim+1].blue  * ker[25].blue;
-
-        sum += src[i+3*dim+2].red   * ker[26].red;
-        sum += src[i+3*dim+2].green * ker[26].green;
-        sum += src[i+3*dim+2].blue  * ker[26].blue;
-
-        sum += src[i+3*dim+3].red   * ker[27].red;
-        sum += src[i+3*dim+3].green * ker[27].green;
-        sum += src[i+3*dim+3].blue  * ker[27].blue;
-
-        sum += src[i+3*dim+4].red   * ker[28].red;
-        sum += src[i+3*dim+4].green * ker[28].green;
-        sum += src[i+3*dim+4].blue  * ker[28].blue;
-
-        sum += src[i+3*dim+5].red   * ker[29].red;
-        sum += src[i+3*dim+5].green * ker[29].green;
-        sum += src[i+3*dim+5].blue  * ker[29].blue;
-
-        sum += src[i+3*dim+6].red   * ker[30].red;
-        sum += src[i+3*dim+6].green * ker[30].green;
-        sum += src[i+3*dim+6].blue  * ker[30].blue;
-
-        sum += src[i+3*dim+7].red   * ker[31].red;
-        sum += src[i+3*dim+7].green * ker[31].green;
-        sum += src[i+3*dim+7].blue  * ker[31].blue;
-
-        dst[i+3*dim] = sum;
-        sum = 0;
-
-        sum += src[i+4*dim].red   * ker[32].red;
-        sum += src[i+4*dim].green * ker[32].green;
-        sum += src[i+4*dim].blue  * ker[32].blue;
-
-        sum += src[i+4*dim+1].red   * ker[33].red;
-        sum += src[i+4*dim+1].green * ker[33].green;
-        sum += src[i+4*dim+1].blue  * ker[33].blue;
-
-        sum += src[i+4*dim+2].red   * ker[34].red;
-        sum += src[i+4*dim+2].green * ker[34].green;
-        sum += src[i+4*dim+2].blue  * ker[34].blue;
-
-        sum += src[i+4*dim+3].red   * ker[35].red;
-        sum += src[i+4*dim+3].green * ker[35].green;
-        sum += src[i+4*dim+3].blue  * ker[35].blue;
-
-        sum += src[i+4*dim+4].red   * ker[36].red;
-        sum += src[i+4*dim+4].green * ker[36].green;
-        sum += src[i+4*dim+4].blue  * ker[36].blue;
-
-        sum += src[i+4*dim+5].red   * ker[37].red;
-        sum += src[i+4*dim+5].green * ker[37].green;
-        sum += src[i+4*dim+5].blue  * ker[37].blue;
-
-        sum += src[i+4*dim+6].red   * ker[38].red;
-        sum += src[i+4*dim+6].green * ker[38].green;
-        sum += src[i+4*dim+6].blue  * ker[38].blue;
-
-        sum += src[i+4*dim+7].red   * ker[39].red;
-        sum += src[i+4*dim+7].green * ker[39].green;
-        sum += src[i+4*dim+7].blue  * ker[39].blue;
-
-        dst[i+4*dim] = sum;
-        sum = 0;
-
-        sum += src[i+5*dim].red   * ker[40].red;
-        sum += src[i+5*dim].green * ker[40].green;
-        sum += src[i+5*dim].blue  * ker[40].blue;
-
-        sum += src[i+5*dim+1].red   * ker[41].red;
-        sum += src[i+5*dim+1].green * ker[41].green;
-        sum += src[i+5*dim+1].blue  * ker[41].blue;
-
-        sum += src[i+5*dim+2].red   * ker[42].red;
-        sum += src[i+5*dim+2].green * ker[42].green;
-        sum += src[i+5*dim+2].blue  * ker[42].blue;
-
-        sum += src[i+5*dim+3].red   * ker[43].red;
-        sum += src[i+5*dim+3].green * ker[43].green;
-        sum += src[i+5*dim+3].blue  * ker[43].blue;
-
-        sum += src[i+5*dim+4].red   * ker[44].red;
-        sum += src[i+5*dim+4].green * ker[44].green;
-        sum += src[i+5*dim+4].blue  * ker[44].blue;
-
-        sum += src[i+5*dim+5].red   * ker[45].red;
-        sum += src[i+5*dim+5].green * ker[45].green;
-        sum += src[i+5*dim+5].blue  * ker[45].blue;
-
-        sum += src[i+5*dim+6].red   * ker[46].red;
-        sum += src[i+5*dim+6].green * ker[46].green;
-        sum += src[i+5*dim+6].blue  * ker[46].blue;
-
-        sum += src[i+5*dim+7].red   * ker[47].red;
-        sum += src[i+5*dim+7].green * ker[47].green;
-        sum += src[i+5*dim+7].blue  * ker[47].blue;
-
-        dst[i+5*dim] = sum;
-        sum = 0;
-
-        sum += src[i+6*dim].red   * ker[48].red;
-        sum += src[i+6*dim].green * ker[48].green;
-        sum += src[i+6*dim].blue  * ker[48].blue;
-
-        sum += src[i+6*dim+1].red   * ker[49].red;
-        sum += src[i+6*dim+1].green * ker[49].green;
-        sum += src[i+6*dim+1].blue  * ker[49].blue;
-
-        sum += src[i+6*dim+2].red   * ker[50].red;
-        sum += src[i+6*dim+2].green * ker[50].green;
-        sum += src[i+6*dim+2].blue  * ker[50].blue;
-
-        sum += src[i+6*dim+3].red   * ker[51].red;
-        sum += src[i+6*dim+3].green * ker[51].green;
-        sum += src[i+6*dim+3].blue  * ker[51].blue;
-
-        sum += src[i+6*dim+4].red   * ker[52].red;
-        sum += src[i+6*dim+4].green * ker[52].green;
-        sum += src[i+6*dim+4].blue  * ker[52].blue;
-
-        sum += src[i+6*dim+5].red   * ker[53].red;
-        sum += src[i+6*dim+5].green * ker[53].green;
-        sum += src[i+6*dim+5].blue  * ker[53].blue;
-
-        sum += src[i+6*dim+6].red   * ker[54].red;
-        sum += src[i+6*dim+6].green * ker[54].green;
-        sum += src[i+6*dim+6].blue  * ker[54].blue;
-
-        sum += src[i+6*dim+7].red   * ker[55].red;
-        sum += src[i+6*dim+7].green * ker[55].green;
-        sum += src[i+6*dim+7].blue  * ker[55].blue;
-
-        dst[i+6*dim] = sum;
-        sum = 0;
-
-        sum += src[i+7*dim].red   * ker[56].red;
-        sum += src[i+7*dim].green * ker[56].green;
-        sum += src[i+7*dim].blue  * ker[56].blue;
-
-        sum += src[i+7*dim+1].red   * ker[57].red;
-        sum += src[i+7*dim+1].green * ker[57].green;
-        sum += src[i+7*dim+1].blue  * ker[57].blue;
-
-        sum += src[i+7*dim+2].red   * ker[58].red;
-        sum += src[i+7*dim+2].green * ker[58].green;
-        sum += src[i+7*dim+2].blue  * ker[58].blue;
-
-        sum += src[i+7*dim+3].red   * ker[59].red;
-        sum += src[i+7*dim+3].green * ker[59].green;
-        sum += src[i+7*dim+3].blue  * ker[59].blue;
-
-        sum += src[i+7*dim+4].red   * ker[60].red;
-        sum += src[i+7*dim+4].green * ker[60].green;
-        sum += src[i+7*dim+4].blue  * ker[60].blue;
-
-        sum += src[i+7*dim+5].red   * ker[61].red;
-        sum += src[i+7*dim+5].green * ker[61].green;
-        sum += src[i+7*dim+5].blue  * ker[61].blue;
-
-        sum += src[i+7*dim+6].red   * ker[62].red;
-        sum += src[i+7*dim+6].green * ker[62].green;
-        sum += src[i+7*dim+6].blue  * ker[62].blue;
-
-        sum += src[i+7*dim+7].red   * ker[63].red;
-        sum += src[i+7*dim+7].green * ker[63].green;
-        sum += src[i+7*dim+7].blue  * ker[63].blue;
-
-        dst[i+7*dim] = sum;
-        sum = 0;
-    }
-}
-
-void convolution_using_stack(int dim, pixel *src, pixel *ker, unsigned *dst)
-{
-
-    int i,j,k,sum,
-    sum_red_0, sum_green_0, sum_blue_0,
-    sum_red_1, sum_green_1, sum_blue_1,
-    sum_red_2, sum_green_2, sum_blue_2,
-    sum_red_3, sum_green_3, sum_blue_3,
-    sum_red_4, sum_green_4, sum_blue_4,
-    sum_red_5, sum_green_5, sum_blue_5,
-    sum_red_6, sum_green_6, sum_blue_6,
-    sum_red_7, sum_green_7, sum_blue_7,
-    src_index=0;
-
-    for(i = 0; i < dim-8+1; i++) {
-        for(j = 0; j < dim-8+1; j++) {
-            sum_red_0 = 0; sum_green_0 = 0; sum_blue_0 = 0;
-            sum_red_1 = 0; sum_green_1 = 0; sum_blue_1 = 0;
-            sum_red_2 = 0; sum_green_2 = 0; sum_blue_2 = 0;
-            sum_red_3 = 0; sum_green_3 = 0; sum_blue_3 = 0;
-            sum_red_4 = 0; sum_green_4 = 0; sum_blue_4 = 0;
-            sum_red_5 = 0; sum_green_5 = 0; sum_blue_5 = 0;
-            sum_red_6 = 0; sum_green_6 = 0; sum_blue_6 = 0;
-            sum_red_7 = 0; sum_green_7 = 0; sum_blue_7 = 0;
-            for(k = 0; k < 64; k+=8) {
-                sum_red_0   += src[src_index].red * ker[k].red;
-                sum_green_0 += src[src_index].green * ker[k].green;
-                sum_blue_0  += src[src_index].blue * ker[k].blue;
-
-                sum_red_1   += src[src_index+1].red * ker[k+1].red;
-                sum_green_1 += src[src_index+1].green * ker[k+1].green;
-                sum_blue_1  += src[src_index+1].blue * ker[k+1].blue;
-
-                sum_red_2   += src[src_index+2].red * ker[k+2].red;
-                sum_green_2 += src[src_index+2].green * ker[k+2].green;
-                sum_blue_2  += src[src_index+2].blue * ker[k+2].blue;
-
-                sum_red_3   += src[src_index+3].red * ker[k+3].red;
-                sum_green_3 += src[src_index+3].green * ker[k+3].green;
-                sum_blue_3  += src[src_index+3].blue * ker[k+3].blue;
-
-                sum_red_4   += src[src_index+4].red * ker[k+4].red;
-                sum_green_4 += src[src_index+4].green * ker[k+4].green;
-                sum_blue_4  += src[src_index+4].blue * ker[k+4].blue;
-
-                sum_red_5   += src[src_index+5].red * ker[k+5].red;
-                sum_green_5 += src[src_index+5].green * ker[k+5].green;
-                sum_blue_5  += src[src_index+5].blue * ker[k+5].blue;
-
-                sum_red_6   += src[src_index+6].red * ker[k+6].red;
-                sum_green_6 += src[src_index+6].green * ker[k+6].green;
-                sum_blue_6  += src[src_index+6].blue * ker[k+6].blue;
-
-                sum_red_7   += src[src_index+7].red * ker[k+7].red;
-                sum_green_7 += src[src_index+7].green * ker[k+7].green;
-                sum_blue_7  += src[src_index+7].blue * ker[k+7].blue;
-
-                src_index += dim;
-            }
-            sum = sum_red_0 + sum_green_0 + sum_blue_0
-                + sum_red_1 + sum_green_1 + sum_blue_1
-                + sum_red_2 + sum_green_2 + sum_blue_2
-                + sum_red_3 + sum_green_3 + sum_blue_3
-                + sum_red_4 + sum_green_4 + sum_blue_4
-                + sum_red_5 + sum_green_5 + sum_blue_5
-                + sum_red_6 + sum_green_6 + sum_blue_6
-                + sum_red_7 + sum_green_7 + sum_blue_7;
-            src_index -= (dim << 3);
-            dst[src_index++] = sum;
-        }
-        src_index += 7;
-    }
-}
 
 /*********************************************************************
  * register_conv_functions - Register all of your different versions
@@ -776,6 +610,7 @@ void register_conv_functions() {
     add_conv_function(&convolution, convolution_descr);
     add_conv_function(&bahadir_convolution,bahadir_convolution_descr);
     add_conv_function(&bahadir_convolutionV3,bahadir_convolution_descrV3);
+    add_conv_function(&bahadir_convolutionV4,bahadir_convolution_descrV4);
     /* ... Register additional test functions here */
 }
 
