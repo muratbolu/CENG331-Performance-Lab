@@ -59,322 +59,474 @@ void naive_conv(int dim, pixel *src, pixel *ker, unsigned *dst) {
 char convolution_descr[] = "Convolution: Current working version";
 void convolution(int dim, pixel *src, pixel *ker, unsigned *dst)
 {
-    const int size = dim-7;
-    int m = 0;
-    int i,j,s1,s2,s3,s4,s5,s6,s7,s8,zet,n;
-    int n1,n2,n3,n4,n5,n6,n7,n8;
-    unsigned short* my_ker = (unsigned short*) malloc(1+3*64*sizeof(unsigned short));
-    for (i = 0; i < 64; i++) {
-        my_ker[3*i+1] = ker[i].red;
-        my_ker[3*i+2] = ker[i].green;
-        my_ker[3*i+3] = ker[i].blue;
-    }
-    for (i = 0; i < size; i++) {
-        n = m;
-        n1 = n;
-        for (j = 0; j < size; j++) {
-            s1 = src[n1].red   * my_ker[1]
-               + src[n1].green * my_ker[2]
-               + src[n1].blue  * my_ker[3]
 
-               + src[n1 + 1].red   * my_ker[4]
-               + src[n1 + 1].green * my_ker[5]
-               + src[n1 + 1].blue  * my_ker[6]
+    int i,j,sum;
 
-               + src[n1 + 2].red   * my_ker[7]
-               + src[n1 + 2].green * my_ker[8]
-               + src[n1 + 2].blue  * my_ker[9]
+    for(i = 0; i < dim-8+1; i++) {
+        for(j = 0; j < dim-8+1; j++) {
+            sum = 0;
+            sum += src[0].red
+                 * ker[0].red;
+            sum += src[0].green
+                 * ker[0].green;
+            sum += src[0].blue
+                 * ker[0].blue;
 
-               + src[n1 + 3].red   * my_ker[10]
-               + src[n1 + 3].green * my_ker[11]
-               + src[n1 + 3].blue  * my_ker[12]
+            sum += src[1].red
+                 * ker[1].red;
+            sum += src[1].green
+                 * ker[1].green;
+            sum += src[1].blue
+                 * ker[1].blue;
 
-               + src[n1 + 4].red   * my_ker[13]
-               + src[n1 + 4].green * my_ker[14]
-               + src[n1 + 4].blue  * my_ker[15]
+            sum += src[2].red
+                 * ker[2].red;
+            sum += src[2].green
+                 * ker[2].green;
+            sum += src[2].blue
+                 * ker[2].blue;
 
-               + src[n1 + 5].red   * my_ker[16]
-               + src[n1 + 5].green * my_ker[17]
-               + src[n1 + 5].blue  * my_ker[18]
+            sum += src[3].red
+                 * ker[3].red;
+            sum += src[3].green
+                 * ker[3].green;
+            sum += src[3].blue
+                 * ker[3].blue;
 
-               + src[n1 + 6].red   * my_ker[19]
-               + src[n1 + 6].green * my_ker[20]
-               + src[n1 + 6].blue  * my_ker[21]
+            sum += src[4].red
+                 * ker[4].red;
+            sum += src[4].green
+                 * ker[4].green;
+            sum += src[4].blue
+                 * ker[4].blue;
 
-               + src[n1 + 7].red   * my_ker[22]
-               + src[n1 + 7].green * my_ker[23]
-               + src[n1 + 7].blue  * my_ker[24];
+            sum += src[5].red
+                 * ker[5].red;
+            sum += src[5].green
+                 * ker[5].green;
+            sum += src[5].blue
+                 * ker[5].blue;
 
-            dst[n1++] = s1;
+            sum += src[6].red
+                 * ker[6].red;
+            sum += src[6].green
+                 * ker[6].green;
+            sum += src[6].blue
+                 * ker[6].blue;
+
+            sum += src[7].red
+                 * ker[7].red;
+            sum += src[7].green
+                 * ker[7].green;
+            sum += src[7].blue
+                 * ker[7].blue;
+
+            src += dim;
+
+            sum += src[0].red
+                 * ker[8].red;
+            sum += src[0].green
+                 * ker[8].green;
+            sum += src[0].blue
+                 * ker[8].blue;
+
+            sum += src[1].red
+                 * ker[9].red;
+            sum += src[1].green
+                 * ker[9].green;
+            sum += src[1].blue
+                 * ker[9].blue;
+
+            sum += src[2].red
+                 * ker[10].red;
+            sum += src[2].green
+                 * ker[10].green;
+            sum += src[2].blue
+                 * ker[10].blue;
+
+            sum += src[3].red
+                 * ker[11].red;
+            sum += src[3].green
+                 * ker[11].green;
+            sum += src[3].blue
+                 * ker[11].blue;
+
+            sum += src[4].red
+                 * ker[12].red;
+            sum += src[4].green
+                 * ker[12].green;
+            sum += src[4].blue
+                 * ker[12].blue;
+
+            sum += src[5].red
+                 * ker[13].red;
+            sum += src[5].green
+                 * ker[13].green;
+            sum += src[5].blue
+                 * ker[13].blue;
+
+            sum += src[6].red
+                 * ker[14].red;
+            sum += src[6].green
+                 * ker[14].green;
+            sum += src[6].blue
+                 * ker[14].blue;
+
+            sum += src[7].red
+                 * ker[15].red;
+            sum += src[7].green
+                 * ker[15].green;
+            sum += src[7].blue
+                 * ker[15].blue;
+
+            src += dim;
+            sum += src[0].red
+                 * ker[16].red;
+            sum += src[0].green
+                 * ker[16].green;
+            sum += src[0].blue
+                 * ker[16].blue;
+
+            sum += src[1].red
+                 * ker[17].red;
+            sum += src[1].green
+                 * ker[17].green;
+            sum += src[1].blue
+                 * ker[17].blue;
+
+            sum += src[2].red
+                 * ker[18].red;
+            sum += src[2].green
+                 * ker[18].green;
+            sum += src[2].blue
+                 * ker[18].blue;
+
+            sum += src[3].red
+                 * ker[19].red;
+            sum += src[3].green
+                 * ker[19].green;
+            sum += src[3].blue
+                 * ker[19].blue;
+
+            sum += src[4].red
+                 * ker[20].red;
+            sum += src[4].green
+                 * ker[20].green;
+            sum += src[4].blue
+                 * ker[20].blue;
+
+            sum += src[5].red
+                 * ker[21].red;
+            sum += src[5].green
+                 * ker[21].green;
+            sum += src[5].blue
+                 * ker[21].blue;
+
+            sum += src[6].red
+                 * ker[22].red;
+            sum += src[6].green
+                 * ker[22].green;
+            sum += src[6].blue
+                 * ker[22].blue;
+
+            sum += src[7].red
+                 * ker[23].red;
+            sum += src[7].green
+                 * ker[23].green;
+            sum += src[7].blue
+                 * ker[23].blue;
+
+            src += dim;
+            sum += src[0].red
+                 * ker[24].red;
+            sum += src[0].green
+                 * ker[24].green;
+            sum += src[0].blue
+                 * ker[24].blue;
+
+            sum += src[1].red
+                 * ker[25].red;
+            sum += src[1].green
+                 * ker[25].green;
+            sum += src[1].blue
+                 * ker[25].blue;
+
+            sum += src[2].red
+                 * ker[26].red;
+            sum += src[2].green
+                 * ker[26].green;
+            sum += src[2].blue
+                 * ker[26].blue;
+
+            sum += src[3].red
+                 * ker[27].red;
+            sum += src[3].green
+                 * ker[27].green;
+            sum += src[3].blue
+                 * ker[27].blue;
+
+            sum += src[4].red
+                 * ker[28].red;
+            sum += src[4].green
+                 * ker[28].green;
+            sum += src[4].blue
+                 * ker[28].blue;
+
+            sum += src[5].red
+                 * ker[29].red;
+            sum += src[5].green
+                 * ker[29].green;
+            sum += src[5].blue
+                 * ker[29].blue;
+
+            sum += src[6].red
+                 * ker[30].red;
+            sum += src[6].green
+                 * ker[30].green;
+            sum += src[6].blue
+                 * ker[30].blue;
+
+            sum += src[7].red
+                 * ker[31].red;
+            sum += src[7].green
+                 * ker[31].green;
+            sum += src[7].blue
+                 * ker[31].blue;
+
+            src += dim;
+            sum += src[0].red
+                 * ker[32].red;
+            sum += src[0].green
+                 * ker[32].green;
+            sum += src[0].blue
+                 * ker[32].blue;
+
+            sum += src[1].red
+                 * ker[33].red;
+            sum += src[1].green
+                 * ker[33].green;
+            sum += src[1].blue
+                 * ker[33].blue;
+
+            sum += src[2].red
+                 * ker[34].red;
+            sum += src[2].green
+                 * ker[34].green;
+            sum += src[2].blue
+                 * ker[34].blue;
+
+            sum += src[3].red
+                 * ker[35].red;
+            sum += src[3].green
+                 * ker[35].green;
+            sum += src[3].blue
+                 * ker[35].blue;
+
+            sum += src[4].red
+                 * ker[36].red;
+            sum += src[4].green
+                 * ker[36].green;
+            sum += src[4].blue
+                 * ker[36].blue;
+
+            sum += src[5].red
+                 * ker[37].red;
+            sum += src[5].green
+                 * ker[37].green;
+            sum += src[5].blue
+                 * ker[37].blue;
+
+            sum += src[6].red
+                 * ker[38].red;
+            sum += src[6].green
+                 * ker[38].green;
+            sum += src[6].blue
+                 * ker[38].blue;
+
+            sum += src[7].red
+                 * ker[39].red;
+            sum += src[7].green
+                 * ker[39].green;
+            sum += src[7].blue
+                 * ker[39].blue;
+
+            src += dim;
+            sum += src[0].red
+                 * ker[40].red;
+            sum += src[0].green
+                 * ker[40].green;
+            sum += src[0].blue
+                 * ker[40].blue;
+
+            sum += src[1].red
+                 * ker[41].red;
+            sum += src[1].green
+                 * ker[41].green;
+            sum += src[1].blue
+                 * ker[41].blue;
+
+            sum += src[2].red
+                 * ker[42].red;
+            sum += src[2].green
+                 * ker[42].green;
+            sum += src[2].blue
+                 * ker[42].blue;
+
+            sum += src[3].red
+                 * ker[43].red;
+            sum += src[3].green
+                 * ker[43].green;
+            sum += src[3].blue
+                 * ker[43].blue;
+
+            sum += src[4].red
+                 * ker[44].red;
+            sum += src[4].green
+                 * ker[44].green;
+            sum += src[4].blue
+                 * ker[44].blue;
+
+            sum += src[5].red
+                 * ker[45].red;
+            sum += src[5].green
+                 * ker[45].green;
+            sum += src[5].blue
+                 * ker[45].blue;
+
+            sum += src[6].red
+                 * ker[46].red;
+            sum += src[6].green
+                 * ker[46].green;
+            sum += src[6].blue
+                 * ker[46].blue;
+
+            sum += src[7].red
+                 * ker[47].red;
+            sum += src[7].green
+                 * ker[47].green;
+            sum += src[7].blue
+                 * ker[47].blue;
+
+            src += dim;
+            sum += src[0].red
+                 * ker[48].red;
+            sum += src[0].green
+                 * ker[48].green;
+            sum += src[0].blue
+                 * ker[48].blue;
+
+            sum += src[1].red
+                 * ker[49].red;
+            sum += src[1].green
+                 * ker[49].green;
+            sum += src[1].blue
+                 * ker[49].blue;
+
+            sum += src[2].red
+                 * ker[50].red;
+            sum += src[2].green
+                 * ker[50].green;
+            sum += src[2].blue
+                 * ker[50].blue;
+
+            sum += src[3].red
+                 * ker[51].red;
+            sum += src[3].green
+                 * ker[51].green;
+            sum += src[3].blue
+                 * ker[51].blue;
+
+            sum += src[4].red
+                 * ker[52].red;
+            sum += src[4].green
+                 * ker[52].green;
+            sum += src[4].blue
+                 * ker[52].blue;
+
+            sum += src[5].red
+                 * ker[53].red;
+            sum += src[5].green
+                 * ker[53].green;
+            sum += src[5].blue
+                 * ker[53].blue;
+
+            sum += src[6].red
+                 * ker[54].red;
+            sum += src[6].green
+                 * ker[54].green;
+            sum += src[6].blue
+                 * ker[54].blue;
+
+            sum += src[7].red
+                 * ker[55].red;
+            sum += src[7].green
+                 * ker[55].green;
+            sum += src[7].blue
+                 * ker[55].blue;
+
+            src += dim;
+            sum += src[0].red
+                 * ker[56].red;
+            sum += src[0].green
+                 * ker[56].green;
+            sum += src[0].blue
+                 * ker[56].blue;
+
+            sum += src[1].red
+                 * ker[57].red;
+            sum += src[1].green
+                 * ker[57].green;
+            sum += src[1].blue
+                 * ker[57].blue;
+
+            sum += src[2].red
+                 * ker[58].red;
+            sum += src[2].green
+                 * ker[58].green;
+            sum += src[2].blue
+                 * ker[58].blue;
+
+            sum += src[3].red
+                 * ker[59].red;
+            sum += src[3].green
+                 * ker[59].green;
+            sum += src[3].blue
+                 * ker[59].blue;
+
+            sum += src[4].red
+                 * ker[60].red;
+            sum += src[4].green
+                 * ker[60].green;
+            sum += src[4].blue
+                 * ker[60].blue;
+
+            sum += src[5].red
+                 * ker[61].red;
+            sum += src[5].green
+                 * ker[61].green;
+            sum += src[5].blue
+                 * ker[61].blue;
+
+            sum += src[6].red
+                 * ker[62].red;
+            sum += src[6].green
+                 * ker[62].green;
+            sum += src[6].blue
+                 * ker[62].blue;
+
+            sum += src[7].red
+                 * ker[63].red;
+            sum += src[7].green
+                 * ker[63].green;
+            sum += src[7].blue
+                 * ker[63].blue;
+
+            src += dim;
+            src -= (dim << 3);
+            dst[i*dim+j] = sum;
+            src++;
         }
-        zet = dim + n;
-        n2 = n;
-        for(j = 0; j < size; j++){
-            s2 = src[zet].red   * my_ker[25]
-               + src[zet].green * my_ker[26]
-               + src[zet].blue  * my_ker[27]
-
-               + src[zet + 1].red   * my_ker[28]
-               + src[zet + 1].green * my_ker[29]
-               + src[zet + 1].blue  * my_ker[30]
-
-               + src[zet + 2].red   * my_ker[31]
-               + src[zet + 2].green * my_ker[32]
-               + src[zet + 2].blue  * my_ker[33]
-
-               + src[zet + 3].red   * my_ker[34]
-               + src[zet + 3].green * my_ker[35]
-               + src[zet + 3].blue  * my_ker[36]
-
-               + src[zet + 4].red   * my_ker[37]
-               + src[zet + 4].green * my_ker[38]
-               + src[zet + 4].blue  * my_ker[39]
-
-               + src[zet + 5].red   * my_ker[40]
-               + src[zet + 5].green * my_ker[41]
-               + src[zet + 5].blue  * my_ker[42]
-
-               + src[zet + 6].red   * my_ker[43]
-               + src[zet + 6].green * my_ker[44]
-               + src[zet + 6].blue  * my_ker[45]
-
-               + src[zet + 7].red   * my_ker[46]
-               + src[zet + 7].green * my_ker[47]
-               + src[zet + 7].blue  * my_ker[48];
-
-            dst[n2++] += s2;
-            zet++;
-        }
-        zet = (dim << 1) + n;
-        n3 = n;
-        for (int j = 0; j < size; j++) {
-            s3 = src[zet].red   * my_ker[49]
-               + src[zet].green * my_ker[50]
-               + src[zet].blue  * my_ker[51]
-
-               + src[zet + 1].red   * my_ker[52]
-               + src[zet + 1].green * my_ker[53]
-               + src[zet + 1].blue  * my_ker[54]
-
-               + src[zet + 2].red   * my_ker[55]
-               + src[zet + 2].green * my_ker[56]
-               + src[zet + 2].blue  * my_ker[57]
-
-               + src[zet + 3].red   * my_ker[58]
-               + src[zet + 3].green * my_ker[59]
-               + src[zet + 3].blue  * my_ker[60]
-
-               + src[zet + 4].red   * my_ker[61]
-               + src[zet + 4].green * my_ker[62]
-               + src[zet + 4].blue  * my_ker[63]
-
-               + src[zet + 5].red   * my_ker[64]
-               + src[zet + 5].green * my_ker[65]
-               + src[zet + 5].blue  * my_ker[66]
-
-               + src[zet + 6].red   * my_ker[67]
-               + src[zet + 6].green * my_ker[68]
-               + src[zet + 6].blue  * my_ker[69]
-
-               + src[zet + 7].red   * my_ker[70]
-               + src[zet + 7].green * my_ker[71]
-               + src[zet + 7].blue  * my_ker[72];
-
-            dst[n3++] += s3;
-            zet++;
-        }
-        zet = 3 * dim + n;
-        n4 = n;
-        for(int j = 0; j < size; j++){
-            s4 = src[zet].red   * my_ker[73]
-               + src[zet].green * my_ker[74]
-               + src[zet].blue  * my_ker[75]
-
-               + src[zet + 1].red   * my_ker[76]
-               + src[zet + 1].green * my_ker[77]
-               + src[zet + 1].blue  * my_ker[78]
-
-               + src[zet + 2].red   * my_ker[79]
-               + src[zet + 2].green * my_ker[80]
-               + src[zet + 2].blue  * my_ker[81]
-
-               + src[zet + 3].red   * my_ker[82]
-               + src[zet + 3].green * my_ker[83]
-               + src[zet + 3].blue  * my_ker[84]
-
-               + src[zet + 4].red   * my_ker[85]
-               + src[zet + 4].green * my_ker[86]
-               + src[zet + 4].blue  * my_ker[87]
-
-               + src[zet + 5].red   * my_ker[88]
-               + src[zet + 5].green * my_ker[89]
-               + src[zet + 5].blue  * my_ker[90]
-
-               + src[zet + 6].red   * my_ker[91]
-               + src[zet + 6].green * my_ker[92]
-               + src[zet + 6].blue  * my_ker[93]
-
-               + src[zet + 7].red   * my_ker[94]
-               + src[zet + 7].green * my_ker[95]
-               + src[zet + 7].blue  * my_ker[96];
-
-            dst[n4++] += s4;
-            zet++;
-        }
-        zet = (dim << 2) + n;
-        n5 = n;
-        for(int j = 0;j < size; j++){
-            s5 = src[zet].red   * my_ker[97]
-               + src[zet].green * my_ker[98]
-               + src[zet].blue  * my_ker[99]
-
-               + src[zet + 1].red   * my_ker[100]
-               + src[zet + 1].green * my_ker[101]
-               + src[zet + 1].blue  * my_ker[102]
-
-               + src[zet + 2].red   * my_ker[103]
-               + src[zet + 2].green * my_ker[104]
-               + src[zet + 2].blue  * my_ker[105]
-
-               + src[zet + 3].red   * my_ker[106]
-               + src[zet + 3].green * my_ker[107]
-               + src[zet + 3].blue  * my_ker[108]
-
-               + src[zet + 4].red   * my_ker[109]
-               + src[zet + 4].green * my_ker[110]
-               + src[zet + 4].blue  * my_ker[111]
-
-               + src[zet + 5].red   * my_ker[112]
-               + src[zet + 5].green * my_ker[113]
-               + src[zet + 5].blue  * my_ker[114]
-
-               + src[zet + 6].red   * my_ker[115]
-               + src[zet + 6].green * my_ker[116]
-               + src[zet + 6].blue  * my_ker[117]
-
-               + src[zet + 7].red   * my_ker[118]
-               + src[zet + 7].green * my_ker[119]
-               + src[zet + 7].blue  * my_ker[120];
-
-            dst[n5++] += s5;
-            zet++;
-        }
-        zet = 5 * dim + n;
-        n6 = n;
-        for(int j = 0;j<size;j++){
-            s6 = src[zet].red   * my_ker[121]
-               + src[zet].green * my_ker[122]
-               + src[zet].blue  * my_ker[123]
-
-               + src[zet + 1].red   * my_ker[124]
-               + src[zet + 1].green * my_ker[125]
-               + src[zet + 1].blue  * my_ker[126]
-
-               + src[zet + 2].red   * my_ker[127]
-               + src[zet + 2].green * my_ker[128]
-               + src[zet + 2].blue  * my_ker[129]
-
-               + src[zet + 3].red   * my_ker[130]
-               + src[zet + 3].green * my_ker[131]
-               + src[zet + 3].blue  * my_ker[132]
-
-               + src[zet + 4].red   * my_ker[133]
-               + src[zet + 4].green * my_ker[134]
-               + src[zet + 4].blue  * my_ker[135]
-
-               + src[zet + 5].red   * my_ker[136]
-               + src[zet + 5].green * my_ker[137]
-               + src[zet + 5].blue  * my_ker[138]
-
-               + src[zet + 6].red   * my_ker[139]
-               + src[zet + 6].green * my_ker[140]
-               + src[zet + 6].blue  * my_ker[141]
-
-               + src[zet + 7].red   * my_ker[142]
-               + src[zet + 7].green * my_ker[143]
-               + src[zet + 7].blue  * my_ker[144];
-
-            dst[n6++] += s6;
-            zet++;
-        }
-        zet = 6 * dim + n;
-        n7 = n;
-        for(int j=0 ; j< size;j++){
-            s7 = src[zet].red   * my_ker[145]
-               + src[zet].green * my_ker[146]
-               + src[zet].blue  * my_ker[147]
-
-               + src[zet + 1].red   * my_ker[148]
-               + src[zet + 1].green * my_ker[149]
-               + src[zet + 1].blue  * my_ker[150]
-
-               + src[zet + 2].red   * my_ker[151]
-               + src[zet + 2].green * my_ker[152]
-               + src[zet + 2].blue  * my_ker[153]
-
-               + src[zet + 3].red   * my_ker[154]
-               + src[zet + 3].green * my_ker[155]
-               + src[zet + 3].blue  * my_ker[156]
-
-               + src[zet + 4].red   * my_ker[157]
-               + src[zet + 4].green * my_ker[158]
-               + src[zet + 4].blue  * my_ker[159]
-
-               + src[zet + 5].red   * my_ker[160]
-               + src[zet + 5].green * my_ker[161]
-               + src[zet + 5].blue  * my_ker[162]
-
-               + src[zet + 6].red   * my_ker[163]
-               + src[zet + 6].green * my_ker[164]
-               + src[zet + 6].blue  * my_ker[165]
-
-               + src[zet + 7].red   * my_ker[166]
-               + src[zet + 7].green * my_ker[167]
-               + src[zet + 7].blue  * my_ker[168];
-
-            dst[n7++] += s7;
-            zet++;
-        }
-        zet = 7 * dim + n;
-        n8 = n;
-        for(int j=0;j<size;j++){
-            s8 = src[zet].red   * my_ker[169]
-               + src[zet].green * my_ker[170]
-               + src[zet].blue  * my_ker[171]
-
-               + src[zet + 1].red   * my_ker[172]
-               + src[zet + 1].green * my_ker[173]
-               + src[zet + 1].blue  * my_ker[174]
-
-               + src[zet + 2].red   * my_ker[175]
-               + src[zet + 2].green * my_ker[176]
-               + src[zet + 2].blue  * my_ker[177]
-
-               + src[zet + 3].red   * my_ker[178]
-               + src[zet + 3].green * my_ker[179]
-               + src[zet + 3].blue  * my_ker[180]
-
-               + src[zet + 4].red   * my_ker[181]
-               + src[zet + 4].green * my_ker[182]
-               + src[zet + 4].blue  * my_ker[183]
-
-               + src[zet + 5].red   * my_ker[184]
-               + src[zet + 5].green * my_ker[185]
-               + src[zet + 5].blue  * my_ker[186]
-
-               + src[zet + 6].red   * my_ker[187]
-               + src[zet + 6].green * my_ker[188]
-               + src[zet + 6].blue  * my_ker[189]
-
-               + src[zet + 7].red   * my_ker[190]
-               + src[zet + 7].green * my_ker[191]
-               + src[zet + 7].blue  * my_ker[192];
-
-            dst[n8++] += s8;
-            zet++;
-        }
-
-        m += dim;
+        src += 7;
     }
 }
 
