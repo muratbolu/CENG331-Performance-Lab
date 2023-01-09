@@ -91,8 +91,7 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
     for (i = 0; i < size; i++) {
         n = m;
         n1 = n;
-        for (j = 0; j < size; j++) { 
-            __builtin_prefetch(&src[n1+8],0,0);
+        for (j = 0; j < size; j++) {
             s1 = src[n1].red * ker[0].red + src[n1].green * ker[0].green + src[n1].blue * ker[0].blue +
             src[n1 + 1].red * ker[1].red+ src[n1 + 1].green * ker[1].green+ src[n1 + 1].blue * ker[1].blue +
             src[n1 + 2].red * ker[2].red+ src[n1 + 2].green * ker[2].green+ src[n1 + 2].blue * ker[2].blue+
@@ -106,7 +105,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = dim + n;
         n2 = n;
         for(j = 0; j < size; j++){
-            __builtin_prefetch(&src[zet+8],0,0);
             s2 = src[zet].red * ker[8].red + src[zet].green * ker[8].green + src[zet].blue * ker[8].blue +
             src[zet + 1].red * ker[9].red + src[zet + 1].green * ker[9].green + src[zet + 1].blue * ker[9].blue +
             src[zet + 2].red * ker[10].red + src[zet + 2].green * ker[10].green + src[zet + 2].blue * ker[10].blue +
@@ -121,7 +119,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = (dim << 1) + n; 
         n3 = n;
         for (int j = 0; j < size; j++) {
-            __builtin_prefetch(&src[zet+8],0,0);
             s3 = src[zet].red * ker[16].red + src[zet].green * ker[16].green + src[zet].blue * ker[16].blue +
             src[zet + 1].red * ker[17].red + src[zet + 1].green * ker[17].green + src[zet + 1].blue * ker[17].blue +
             src[zet + 2].red * ker[18].red + src[zet + 2].green * ker[18].green + src[zet + 2].blue * ker[18].blue +
@@ -136,7 +133,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 3 * dim + n;
         n4 = n;
         for(int j = 0; j < size; j++){
-            __builtin_prefetch(&src[zet+8],0,0);
             s4 = src[zet].red * ker[24].red+ src[zet].green * ker[24].green+ src[zet].blue * ker[24].blue+
             src[zet + 1].red * ker[25].red+ src[zet + 1].green * ker[25].green+ src[zet + 1].blue * ker[25].blue+
             src[zet + 2].red * ker[26].red+ src[zet + 2].green * ker[26].green+ src[zet + 2].blue * ker[26].blue+
@@ -151,7 +147,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = (dim << 2) + n;
         n5 = n; 
         for(int j = 0;j < size; j++){
-            __builtin_prefetch(&src[zet+8],0,0);
             s5 = src[zet].red * ker[32].red+ src[zet].green * ker[32].green+ src[zet].blue * ker[32].blue+
             src[zet + 1].red * ker[33].red+ src[zet + 1].green * ker[33].green+ src[zet + 1].blue * ker[33].blue+
             src[zet + 2].red * ker[34].red+ src[zet + 2].green * ker[34].green+ src[zet + 2].blue * ker[34].blue+
@@ -166,7 +161,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 5 * dim + n;
         n6 = n;
         for(int j = 0;j<size;j++){
-            __builtin_prefetch(&src[zet+8],0,0);
             s6 = src[zet].red * ker[40].red + src[zet].green * ker[40].green + src[zet].blue * ker[40].blue +
             src[zet + 1].red * ker[41].red + src[zet + 1].green * ker[41].green + src[zet + 1].blue * ker[41].blue +
             src[zet + 2].red * ker[42].red + src[zet + 2].green * ker[42].green + src[zet + 2].blue * ker[42].blue +
@@ -181,7 +175,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 6 * dim + n; 
         n7 = n;
         for(int j=0 ; j< size;j++){
-            __builtin_prefetch(&src[zet+8],0,0);
             s7 = src[zet].red * ker[48].red + src[zet].green * ker[48].green + src[zet].blue * ker[48].blue +
             src[zet + 1].red * ker[49].red + src[zet + 1].green * ker[49].green + src[zet + 1].blue * ker[49].blue +
             src[zet + 2].red * ker[50].red + src[zet + 2].green * ker[50].green + src[zet + 2].blue * ker[50].blue +
@@ -196,7 +189,6 @@ void bahadir_convolution(int dim, pixel *src, pixel *ker, unsigned *dst){
         zet = 7 * dim + n;
         n8 = n;
         for(int j=0;j<size;j++){
-            __builtin_prefetch(&src[zet+8],0,0);
             s8 = src[zet].red * ker[56].red + src[zet].green * ker[56].green + src[zet].blue * ker[56].blue +
             src[zet + 1].red * ker[57].red + src[zet + 1].green * ker[57].green + src[zet + 1].blue * ker[57].blue +
             src[zet + 2].red * ker[58].red + src[zet + 2].green * ker[58].green + src[zet + 2].blue * ker[58].blue +
