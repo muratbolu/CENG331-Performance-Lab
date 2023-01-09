@@ -1,0 +1,35 @@
+Team Name: biggest commit ever
+ID1: e252130
+Name1: MURAT BOLU
+ID2: e244906
+Name2: UMUT YILMAZ
+ID3: e244814
+Name3: BAHADIR AYDIN
+
+conv: Version = naive_conv: Naive baseline implementation:
+Dim		32	64	128	256	512	Mean
+Your CPEs	277.8	358.0	403.7	427.4	440.6
+Baseline CPEs	277.0	358.0	404.0	427.0	439.0
+Speedup		1.0	1.0	1.0	1.0	1.0	1.0
+
+conv: Version = Convolution: Current working version:
+Dim		32	64	128	256	512	Mean
+Your CPEs	92.1	119.8	135.1	142.2	147.3
+Baseline CPEs	277.0	358.0	404.0	427.0	439.0
+Speedup		3.0	3.0	3.0	3.0	3.0	3.0
+
+Avpol: Version = Naive Average Pooling: Naive baseline implementation:
+Dim		32	64	128	256	512	Mean
+Your CPEs	6.9	6.6	6.5	6.5	6.5
+Baseline CPEs	6.8	6.6	6.5	6.5	6.5
+Speedup		1.0	1.0	1.0	1.0	1.0	1.0
+
+Avpol: Version = Average Pooling: Current working version:
+Dim		32	64	128	256	512	Mean
+Your CPEs	2.6	2.6	2.6	2.7	2.6
+Baseline CPEs	6.8	6.6	6.5	6.5	6.5
+Speedup		2.6	2.5	2.5	2.4	2.5	2.5
+
+Summary of Your Best Scores:
+  Average Pooling: 2.5 (Average Pooling: Current working version)
+  Convolution: 3.0 (Convolution: Current working version)
